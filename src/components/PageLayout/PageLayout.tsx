@@ -22,10 +22,10 @@ const StyledPage = styled.div`
             props.theme.favouritesSidebarMaxWidth}); */
     }
     .main-page-content {
-        flex: 1;
+        flex: 1 1 100%;
     }
     ${FavouritesSidebarStyles} {
-        flex: 0 0 ${props => props.theme.favouritesSidebarMaxWidth};
+        flex: 1 0 35%;
     }
 `;
 

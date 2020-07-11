@@ -37,5 +37,20 @@ export const getLocationsFail = (errorMessage: string): GetLocationsFail => {
 export const getLocations = () => {
     return (dispatch: Dispatch) => {
         dispatch(getLocationsRequest());
+
+        const localStorageLocations = localStorage.getItem('locations');
+        const savedLocations = localStorageLocations ? JSON.parse(localStorageLocations) : [];
+
+        if (!localStorageLocations) {
+            localStorage.setItem('locations', JSON.stringify([]));
+        }
+
+        dispatch(getLocationsSuccess(savedLocations));
+
+        if(savedLocations.length ){
+
+        }
+
     };
 };
+

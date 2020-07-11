@@ -22,6 +22,6 @@ function configureStore(initialState?: AppState): Store<AppState> {
     );
 }
 
-const store = configureStore();
+// const store = configureStore();
 
-export default store;
+export default configureStore;

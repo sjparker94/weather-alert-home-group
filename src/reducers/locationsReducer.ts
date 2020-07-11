@@ -7,6 +7,7 @@ import * as LocationsActionTypes from '../constants/actions';
 // type LocationsActionTypes = any;
 const locationsInitialState: LocationsState = {
     data: [],
+    isInitialLoad: true,
     getLocations: {
         isPending: false,
         success: false,
@@ -20,6 +21,7 @@ const locations = produce((draft: Draft<LocationsState>, action: AllActions) => 
             break;
         case LocationsActionTypes.GET_LOCATIONS_SUCCESS:
             draft.data = castDraft(action.payload);
+            draft.isInitialLoad = false;
             break;
         default:
             neverReached(action);
