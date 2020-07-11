@@ -1,0 +1,74 @@
+// import original module declarations
+import 'styled-components';
+import { BaseThemedCssFunction } from 'styled-components';
+
+declare module 'styled-components' {
+    export interface DefaultTheme {
+        [propName: string]: any;
+        primaryColor: string;
+        secondaryColor: string;
+        highlightColor: string;
+        yellow: string;
+        green: string;
+        red: string;
+        orange: string;
+        blue: string;
+        teal: string;
+        purple: string;
+        black: string;
+        grey: string;
+        lightMidGrey: string;
+        lightGrey: string;
+        lightestGrey: string;
+        lightestGreyLight: string;
+        lightDarkBlueGrey: string;
+        darkBlueGrey: string;
+        darkestBlueGrey: string;
+        lightBlueGrey: string;
+        lightestBlueGrey: string;
+        lightMidBlueGrey: string;
+        midBlueGrey: string;
+        blueGrey: string;
+        offWhite: string;
+        maxWidth: string;
+        singleColWidth: string;
+        favouritesSidebarMaxWidth: string;
+        bs: string;
+        smallBs: string;
+        ts: string;
+        contentBs: string;
+        hoverBs: string;
+        // textColor: string;
+        lightTextColor: string;
+        onDarkTextColor: string;
+        onDarkTextColorLight: string;
+        pageBg: () => string;
+        bodyFontSize: number;
+        gutter: string;
+        gutterHalf: () => string;
+        gutterTablet: string;
+        gutterMobile: string;
+        textColor: string;
+        gutterValue: (unitValue?: string) => number;
+        gutterPercentage: (timesValue: number) => string;
+        googleFont: string;
+        mainBorderRadius: string;
+        smallBorderRadius: string;
+        mainBorderColor: () => string;
+        lightBorderColor: () => string;
+        formBorderColor: () => string;
+        formBorderFocusColor: () => string;
+        fontFamilyString: string;
+        headingFontFamilyString: string;
+        fontWeights: string[];
+        headingFontWeights: string[];
+        headerHeight: string;
+        smoothAnimation: string;
+        bounceAnimation: string;
+        slowToQuickAnimation: string;
+        lastItemMargin: BaseThemedCssFunction;
+        fontSize: (size: number, margin?: string | number) => BaseThemedCssFunction;
+        font: (style: string) => BaseThemedCssFunction;
+        headingFont: (style: string) => BaseThemedCssFunction;
+    }
+}
