@@ -11,7 +11,7 @@ const HomePage: React.FC = () => {
             <p className="welcome-paragraph">
                 Use the form below to search for a city and add it to your favourites
             </p>
-            <ContentBlock>
+            <ContentBlock title="Location Search">
                 <SearchForm />
                 <ConfirmLocationBlock />
             </ContentBlock>

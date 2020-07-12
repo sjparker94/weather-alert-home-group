@@ -31,6 +31,10 @@ const Button = styled.button<Props>`
     ${props => props.theme.font('600')};
     ${props => props.theme.fontSize(18)};
     padding: ${props => props.theme.gutterHalf()};
+    .material-icons {
+        vertical-align: middle;
+        margin: 0 2px;
+    }
     ${({ theme, colorTheme }) => {
         if (colorTheme) {
             if (theme[`${colorTheme}Color`] || theme[colorTheme]) {

@@ -42,11 +42,18 @@ const SearchForm: React.FC = () => {
                     placeholder="Newcastle Upon Tyne"
                     value={inputs.city}
                     description="E.g. Newcastle Upon Tyne or New York"
+                    data-testid="location-search-input"
                 />
                 {/* <MainSearchSelect /> */}
             </div>
-            {error && <ErrorAlertBox error={error} size="form" />}
-            <Button fullWidth colorTheme="primary" disabled={isFormLoading}>
+            {error && <ErrorAlertBox error={error} size="form" testId="search-error" />}
+            <Button
+                fullWidth
+                colorTheme="primary"
+                disabled={isFormLoading}
+                data-testid="main-search-button"
+            >
+                <span className="material-icons">search</span>
                 {isPending ? 'Searching...' : 'Search'}
             </Button>
         </SearchFormStyles>

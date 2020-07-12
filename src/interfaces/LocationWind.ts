@@ -1,7 +1,7 @@
 interface LocationWind {
-    wind: number;
+    speed: number;
     deg: number;
-    gust: number;
+    gust?: number;
 }
 
 export default LocationWind;

@@ -60,10 +60,10 @@ const ConfirmLocationBlock: React.FC = () => {
                 <p className="country">{getName(data.sys.country)}</p>
             </div>
             <ButtonLeftRightWrapper>
-                <Button fullWidth colorTheme="white" onClick={handleCancel}>
+                <Button fullWidth colorTheme="white" onClick={handleCancel} data-testid="cancel-search-button">
                     No (cancel)
                 </Button>
-                <Button fullWidth colorTheme="secondary" onClick={handleConfirm}>
+                <Button fullWidth colorTheme="secondary" onClick={handleConfirm} data-testid="confirm-search-button">
                     Yes, add to favourites
                 </Button>
             </ButtonLeftRightWrapper>

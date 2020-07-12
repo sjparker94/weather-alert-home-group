@@ -1,12 +1,11 @@
-import produce, { Draft, castDraft } from 'immer';
+import produce, { Draft } from 'immer';
 import LocationsState from '../interfaces/LocationsState';
 import neverReached from '../utils/neverReached';
 import { AllActions } from '../actions/allActions';
-import * as LocationsActionTypes from '../constants/actions';
+import * as locationsActionTypes from '../constants/actions';
 import { findByProp } from '../utils/arrayUtils';
 import Location from '../interfaces/Location';
 
-// type LocationsActionTypes = any;
 export const locationsInitialState: LocationsState = {
     data: [],
     isInitialLoad: true,
@@ -24,32 +23,38 @@ export const locationsInitialState: LocationsState = {
 
 const locations = produce((draft: Draft<LocationsState>, action: AllActions) => {
     switch (action.type) {
-        case LocationsActionTypes.GET_LOCATIONS_REQUEST:
+        case locationsActionTypes.GET_LOCATIONS_REQUEST:
             draft.getLocations.isPending = true;
+            draft.getLocations.success = false;
             break;
-        case LocationsActionTypes.GET_LOCATIONS_SUCCESS:
-            draft.data = castDraft(action.payload);
+        case locationsActionTypes.GET_LOCATIONS_SUCCESS:
+            draft.data = action.payload;
+            draft.getLocations.isPending = false;
+            draft.getLocations.success = true;
             draft.isInitialLoad = false;
             break;
-        case LocationsActionTypes.SEARCH_LOCATION_REQUEST:
+        case locationsActionTypes.SEARCH_LOCATION_REQUEST:
             draft.searchLocation.isPending = true;
+            draft.searchLocation.success = false;
             draft.searchLocation.data = null;
             draft.searchLocation.error = null;
             break;
-        case LocationsActionTypes.SEARCH_LOCATION_SUCCESS:
+        case locationsActionTypes.SEARCH_LOCATION_SUCCESS:
             draft.searchLocation.isPending = false;
             draft.searchLocation.error = null;
+            draft.searchLocation.success = true;
             draft.searchLocation.data = action.payload;
             break;
-        case LocationsActionTypes.SEARCH_LOCATION_CANCEL:
+        case locationsActionTypes.SEARCH_LOCATION_CANCEL:
             draft.searchLocation.data = null;
             draft.searchLocation.error = null;
             break;
-        case LocationsActionTypes.SEARCH_LOCATION_FAIL:
+        case locationsActionTypes.SEARCH_LOCATION_FAIL:
             draft.searchLocation.isPending = false;
+            draft.searchLocation.success = false;
             draft.searchLocation.error = action.payload;
             break;
-        case LocationsActionTypes.ADD_LOCATION:
+        case locationsActionTypes.ADD_LOCATION:
             // See if the location is already in favourites
             const currentIdx = draft.data.findIndex(findByProp<Location>('id', action.payload.id));
 

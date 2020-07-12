@@ -33,6 +33,7 @@ interface Location {
     weather: LocationWeather[];
     base: string;
     main: LocationMain;
+    visibility: number;
     wind: LocationWind;
     clouds: LocationClouds;
     dt: number;

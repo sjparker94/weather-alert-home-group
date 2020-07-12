@@ -1,35 +1,35 @@
 import { Action, Dispatch } from 'redux';
-import * as LocationsActionTypes from '../constants/actions';
+import axios from 'axios';
+import * as locationsActionTypes from '../constants/actions';
 import LocationsState from '../interfaces/LocationsState';
 import Location from '../interfaces/Location';
-import apiClient from '../utils/apiClient';
 
 export interface GetLocationsRequest extends Action {
-    type: typeof LocationsActionTypes.GET_LOCATIONS_REQUEST;
+    type: typeof locationsActionTypes.GET_LOCATIONS_REQUEST;
 }
 export interface GetLocationsSuccess extends Action {
-    type: typeof LocationsActionTypes.GET_LOCATIONS_SUCCESS;
+    type: typeof locationsActionTypes.GET_LOCATIONS_SUCCESS;
     payload: Location[];
 }
 export interface GetLocationsFail extends Action {
-    type: typeof LocationsActionTypes.GET_LOCATIONS_FAIL;
+    type: typeof locationsActionTypes.GET_LOCATIONS_FAIL;
     payload: string;
 }
 
 export const getLocationsRequest = (): GetLocationsRequest => {
     return {
-        type: LocationsActionTypes.GET_LOCATIONS_REQUEST,
+        type: locationsActionTypes.GET_LOCATIONS_REQUEST,
     };
 };
 export const getLocationsSuccess = (locations: Location[]): GetLocationsSuccess => {
     return {
-        type: LocationsActionTypes.GET_LOCATIONS_SUCCESS,
+        type: locationsActionTypes.GET_LOCATIONS_SUCCESS,
         payload: locations,
     };
 };
 export const getLocationsFail = (errorMessage: string): GetLocationsFail => {
     return {
-        type: LocationsActionTypes.GET_LOCATIONS_FAIL,
+        type: locationsActionTypes.GET_LOCATIONS_FAIL,
         payload: errorMessage,
     };
 };
@@ -55,41 +55,41 @@ export const getLocations = () => {
 };
 
 export interface SearchLocationRequest extends Action {
-    type: typeof LocationsActionTypes.SEARCH_LOCATION_REQUEST;
+    type: typeof locationsActionTypes.SEARCH_LOCATION_REQUEST;
 }
 export interface SearchLocationSuccess extends Action {
-    type: typeof LocationsActionTypes.SEARCH_LOCATION_SUCCESS;
+    type: typeof locationsActionTypes.SEARCH_LOCATION_SUCCESS;
     payload: Location;
 }
 export interface SearchLocationFail extends Action {
-    type: typeof LocationsActionTypes.SEARCH_LOCATION_FAIL;
+    type: typeof locationsActionTypes.SEARCH_LOCATION_FAIL;
     payload: string;
 }
 export interface SearchLocationCancel extends Action {
-    type: typeof LocationsActionTypes.SEARCH_LOCATION_CANCEL;
+    type: typeof locationsActionTypes.SEARCH_LOCATION_CANCEL;
 }
 
 export const searchLocationRequest = (): SearchLocationRequest => {
     return {
-        type: LocationsActionTypes.SEARCH_LOCATION_REQUEST,
+        type: locationsActionTypes.SEARCH_LOCATION_REQUEST,
     };
 };
 export const searchLocationSuccess = (location: Location): SearchLocationSuccess => {
     return {
-        type: LocationsActionTypes.SEARCH_LOCATION_SUCCESS,
+        type: locationsActionTypes.SEARCH_LOCATION_SUCCESS,
         payload: location,
     };
 };
 export const searchLocationFail = (errorMessage: string): SearchLocationFail => {
     return {
-        type: LocationsActionTypes.SEARCH_LOCATION_FAIL,
+        type: locationsActionTypes.SEARCH_LOCATION_FAIL,
         payload: errorMessage,
     };
 };
 
 export const searchLocationCancel = (): SearchLocationCancel => {
     return {
-        type: LocationsActionTypes.SEARCH_LOCATION_CANCEL,
+        type: locationsActionTypes.SEARCH_LOCATION_CANCEL,
     };
 };
 
@@ -98,13 +98,11 @@ export const searchLocation = (cityName: string) => {
         dispatch(searchLocationRequest());
 
         try {
-            const response = await apiClient.get<Location>(
-                `weather?q=${cityName}&units=${process.env.REACT_APP_OPENWEATHER_API_UNITS}&appid=${
-                    process.env.REACT_APP_OPENWEATHER_API_KEY
-                }`
+            const response = await axios.get<Location>(
+                `${process.env.REACT_APP_OPENWEATHER_API_URL}weather?q=${cityName}&units=${
+                    process.env.REACT_APP_OPENWEATHER_API_UNITS
+                }&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}`
             );
-
-            console.log(response.data);
 
             dispatch(searchLocationSuccess(response.data));
         } catch (err) {
@@ -115,12 +113,12 @@ export const searchLocation = (cityName: string) => {
 };
 
 export interface AddLocation extends Action {
-    type: typeof LocationsActionTypes.ADD_LOCATION;
+    type: typeof locationsActionTypes.ADD_LOCATION;
     payload: Location;
 }
 export const addLocation = (location: Location): AddLocation => {
     return {
-        type: LocationsActionTypes.ADD_LOCATION,
+        type: locationsActionTypes.ADD_LOCATION,
         payload: location,
     } as const;
 };

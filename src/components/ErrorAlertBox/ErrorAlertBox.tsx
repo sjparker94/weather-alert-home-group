@@ -7,9 +7,10 @@ interface Props {
     size?: Sizes;
     marginBottom?: string;
     error: string;
+    testId?: string;
 }
 
-const ErrorAlertBox: React.FC<Props> = ({ error, marginBottom, size }) => {
+const ErrorAlertBox: React.FC<Props> = ({ error, marginBottom, testId, size }) => {
     const animationValues = {
         x: [-10, 10, -20, 10, 0],
     };
@@ -24,6 +25,7 @@ const ErrorAlertBox: React.FC<Props> = ({ error, marginBottom, size }) => {
             transition={transitionValues}
             marginBottom={marginBottom}
             size={size}
+            data-testid={testId}
         >
             <p>{error}</p>
         </ErrorAlertBoxStyles>

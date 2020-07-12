@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App /> renders and matches snapshot 1`] = `
+<div>
+  <div
+    class="sc-fzpans EWeVe"
+  >
+    <div
+      class="main-page-layout-wrapper"
+    >
+      <main
+        class="main-page-content"
+      >
+        <div
+          class="sc-AxjAm oEzzX"
+        >
+          <h1
+            class="welcome-heading"
+          >
+            Welcome!
+          </h1>
+          <p
+            class="welcome-paragraph"
+          >
+            Use the form below to search for a city and add it to your favourites
+          </p>
+          <div
+            class="sc-AxheI fKbPLh"
+            title="Location Search"
+          >
+            <div
+              class="sc-AxgMl kizETN"
+            >
+              <h3>
+                Location Search
+              </h3>
+            </div>
+            <form
+              class="sc-AxhUy hPtbI"
+            >
+              <div
+                class="inputs-wrapper"
+              >
+                <div
+                  class="sc-AxiKw icyWgc"
+                >
+                  <label
+                    for="city"
+                  >
+                    Enter the name of a city
+                  </label>
+                  <input
+                    aria-label="Enter the name of a city"
+                    id="city"
+                    name="city"
+                    placeholder="Newcastle Upon Tyne"
+                    type="text"
+                    value=""
+                  />
+                  <p
+                    class="input-description"
+                  >
+                    E.g. Newcastle Upon Tyne or New York
+                  </p>
+                </div>
+              </div>
+              <button
+                class="sc-AxirZ gKFdqJ"
+                data-testid="main-search-button"
+                disabled=""
+              >
+                <span
+                  class="material-icons"
+                >
+                  search
+                </span>
+                Search
+              </button>
+            </form>
+          </div>
+        </div>
+      </main>
+      <div
+        class="sc-fzozJi kFNntR"
+      >
+        <h2
+          class="main-title"
+        >
+          <span
+            class="material-icons star-icon"
+          >
+            star
+          </span>
+           Your Favourites
+        </h2>
+        <div
+          class="no-locations-saved"
+          data-testid="favourites-no-locations"
+        >
+          <p>
+            No locations have been selected use the form on the home page to add one
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
