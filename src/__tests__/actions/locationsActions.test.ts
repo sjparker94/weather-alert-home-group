@@ -18,6 +18,86 @@ describe('locations actions', () => {
         jest.resetAllMocks();
     });
 
+    it('should create an action when get locations has started', () => {
+        const expectedAction = {
+            type: locationsActionTypes.GET_LOCATIONS_REQUEST,
+        };
+
+        expect(actions.getLocationsRequest()).toEqual(expectedAction);
+    });
+
+    it('should create an action when a get locations has been successful', () => {
+        const expectedAction = {
+            type: locationsActionTypes.GET_LOCATIONS_SUCCESS,
+            payload: [mockLocation],
+        };
+
+        expect(actions.getLocationsSuccess([mockLocation])).toEqual(expectedAction);
+    });
+
+    it('should create an action when a get locations has failed', () => {
+        const expectedAction = {
+            type: locationsActionTypes.GET_LOCATIONS_FAIL,
+        };
+
+        expect(actions.getLocationsFail()).toEqual(expectedAction);
+    });
+
+    it('should create an action to start the get/fetch locations and another action to mark the success of the fetch', async () => {
+        const anotherMockLocation = fakeLocation({
+            name: 'Newcastle upon Tyne',
+        });
+
+        // These will be returned in the fetch mocking new updated weather data
+        const returnMockLocation1 = fakeLocation({
+            name: 'Newcastle upon Tyne',
+        });
+        returnMockLocation1.main.temp = 10;
+        const returnMockLocation2 = fakeLocation({
+            name: 'London',
+        });
+        returnMockLocation2.main.temp = 20;
+
+        const store = mockStore({});
+
+        axios.get = jest
+            .fn()
+            .mockResolvedValue({ data: [returnMockLocation1, returnMockLocation2] });
+
+        const expectedActions = [
+            { type: locationsActionTypes.GET_LOCATIONS_REQUEST },
+            {
+                type: locationsActionTypes.GET_LOCATIONS_SUCCESS,
+                payload: [mockLocation, anotherMockLocation],
+            },
+        ];
+
+        await store.dispatch(actions.getLocations([mockLocation, anotherMockLocation]) as any);
+
+        expect(store.getActions()).toEqual(expectedActions);
+        expect(axios.get).toBeCalledTimes(1);
+    });
+
+    it('should create an action to start the get/fetch locations and another action to mark the failure of the fetch', async () => {
+        const anotherMockLocation = fakeLocation({
+            name: 'Newcastle upon Tyne',
+        });
+
+        const store = mockStore({});
+
+        axios.get = jest.fn().mockRejectedValue(new Error());
+
+        const expectedActions = [
+            { type: locationsActionTypes.GET_LOCATIONS_REQUEST },
+            { type: locationsActionTypes.GET_LOCATIONS_FAIL },
+        ];
+
+        await store.dispatch(actions.getLocations([location, anotherMockLocation]) as any);
+
+        expect(store.getActions()).toEqual(expectedActions);
+        expect(axios.get).toBeCalledTimes(1);
+    });
+
     it('should create an action when a location search has started', () => {
         const expectedAction = {
             type: locationsActionTypes.SEARCH_LOCATION_REQUEST,

@@ -8,7 +8,7 @@ import rootReducer from '../reducers/index';
 import thunk from 'redux-thunk';
 import theme from '../styles/theme';
 
-export const fakeLocation = (): Location => ({
+export const fakeLocation = (edits?: Partial<Location>): Location => ({
     coord: {
         lon: -0.13,
         lat: 51.51,
@@ -50,6 +50,7 @@ export const fakeLocation = (): Location => ({
     id: 2643743,
     name: 'London',
     cod: 200,
+    ...edits,
 });
 
 const render = (ui: any, initialStore = {}, options = {}) => {

@@ -1,4 +1,4 @@
-import locationsReducer from '../../reducers/locationsReducer';
+import locationsReducer, { locationsInitialState } from '../../reducers/locationsReducer';
 import * as locationsActionTypes from '../../constants/actions';
 import { fakeLocation } from '../../utils/testUtils';
 
@@ -30,17 +30,10 @@ describe('locations reducer', () => {
                 type: locationsActionTypes.GET_LOCATIONS_REQUEST,
             })
         ).toEqual({
-            data: [],
-            isInitialLoad: true,
+            ...locationsInitialState,
             getLocations: {
                 isPending: true,
                 success: false,
-            },
-            searchLocation: {
-                isPending: false,
-                success: false,
-                error: null,
-                data: null,
             },
         });
     });
@@ -52,17 +45,26 @@ describe('locations reducer', () => {
                 payload: [mockLocation],
             })
         ).toEqual({
+            ...locationsInitialState,
             data: [mockLocation],
             isInitialLoad: false,
             getLocations: {
                 isPending: false,
                 success: true,
             },
-            searchLocation: {
+        });
+    });
+    it('should handle GET_LOCATIONS_FAIL', () => {
+        expect(
+            locationsReducer(undefined, {
+                type: locationsActionTypes.GET_LOCATIONS_FAIL,
+            })
+        ).toEqual({
+            ...locationsInitialState,
+            isInitialLoad: false,
+            getLocations: {
                 isPending: false,
                 success: false,
-                error: null,
-                data: null,
             },
         });
     });
@@ -73,12 +75,7 @@ describe('locations reducer', () => {
                 type: locationsActionTypes.SEARCH_LOCATION_REQUEST,
             })
         ).toEqual({
-            data: [],
-            isInitialLoad: true,
-            getLocations: {
-                isPending: false,
-                success: false,
-            },
+            ...locationsInitialState,
             searchLocation: {
                 isPending: true,
                 success: false,
@@ -95,12 +92,7 @@ describe('locations reducer', () => {
                 payload: mockLocation,
             })
         ).toEqual({
-            data: [],
-            isInitialLoad: true,
-            getLocations: {
-                isPending: false,
-                success: false,
-            },
+            ...locationsInitialState,
             searchLocation: {
                 isPending: false,
                 success: true,
@@ -118,12 +110,7 @@ describe('locations reducer', () => {
                 payload: errorMessage,
             })
         ).toEqual({
-            data: [],
-            isInitialLoad: true,
-            getLocations: {
-                isPending: false,
-                success: false,
-            },
+            ...locationsInitialState,
             searchLocation: {
                 isPending: false,
                 success: false,
@@ -140,12 +127,8 @@ describe('locations reducer', () => {
                 payload: mockLocation,
             })
         ).toEqual({
+            ...locationsInitialState,
             data: [mockLocation],
-            isInitialLoad: true,
-            getLocations: {
-                isPending: false,
-                success: false,
-            },
             searchLocation: {
                 isPending: false,
                 success: false,
