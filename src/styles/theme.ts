@@ -12,7 +12,7 @@ const theme: DefaultTheme = {
     black: '#111111',
     grey: '#3A3A3A',
     primaryColor: '#ffcc00',
-    secondaryColor: '#0090a6',
+    secondaryColor: '#0D5CC3',
     highlightColor: '#7D5BA6',
     lightMidGrey: '#d2d2d2',
     lightGrey: '#E1E1E1',

@@ -45,7 +45,7 @@ const Button = styled.button<Props>`
             `;
         }
     }}
-    &:before {
+    /* &:before {
         content: '';
         position: absolute;
         width: 100%;
@@ -56,15 +56,15 @@ const Button = styled.button<Props>`
         background-color: #FFF;
         opacity: 0;
         transition: all .15s ${props => props.theme.smoothAnimation};
-    }
+    } */
     &:hover {
-        transform: translateY(-1px);
-        &:before {
+        transform: translateY(-2px);
+        /* &:before {
             opacity: 0.1;
-        }
+        } */
     }
     &:focus {
-        transform: translateY(-1px);
+        transform: translateY(-2px);
         box-shadow: ${buttonHoverBs}, 0 0 0 2px ${props => props.theme.highlightColor};
     }
     &:active {

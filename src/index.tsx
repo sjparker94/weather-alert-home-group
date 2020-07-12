@@ -5,12 +5,19 @@ import { Provider } from 'react-redux';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import configureStore from './store/configureStore';
+import { loadState, saveState } from './utils/localStorage';
 
-const store = configureStore();
+const persistedState = loadState();
+const store = configureStore(persistedState);
+
+// Subscribe to changes to save the locations added into localStorage
+store.subscribe(() => {
+    saveState(store.getState().locations.data);
+});
 
 ReactDOM.render(
     <React.StrictMode>
-        <Provider store={store as any}>
+        <Provider store={store}>
             <App />
         </Provider>
     </React.StrictMode>,

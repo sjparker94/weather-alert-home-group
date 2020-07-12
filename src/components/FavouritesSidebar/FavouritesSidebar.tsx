@@ -16,8 +16,8 @@ const FavouritesSidebar: React.FC = () => {
             </h2>
             {locations.data.length ? (
                 <FavouriteLocationsWrapper>
-                    {locations.data.map((location, i) => (
-                        <p key={i}>Hello</p>
+                    {locations.data.map(location => (
+                        <p key={location.id}>{location.name}</p>
                     ))}
                 </FavouriteLocationsWrapper>
             ) : (
