@@ -51,9 +51,10 @@ exports[`<App /> renders and matches snapshot 1`] = `
                   </label>
                   <input
                     aria-label="Enter the name of a city"
+                    data-testid="location-search-input"
                     id="city"
                     name="city"
-                    placeholder="Newcastle Upon Tyne"
+                    placeholder="Newcastle upon Tyne"
                     type="text"
                     value=""
                   />

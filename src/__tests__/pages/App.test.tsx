@@ -14,18 +14,18 @@ const mockLocation = fakeLocation();
 
 describe('<App />', () => {
     it('renders and matches snapshot', async () => {
-        const { container, getByRole } = render(<App />);
+        const { container, getByTestId } = render(<App />);
 
         // Check that the search button is in the dom
-        expect(getByRole('button')).toBeInTheDocument();
+        expect(getByTestId('location-search-input')).toBeInTheDocument();
 
         expect(container).toMatchSnapshot();
     });
 
     it('handles user input', async () => {
-        const { getByPlaceholderText } = render(<App />);
+        const { getByPlaceholderText, getByTestId } = render(<App />);
 
-        const inputEl = getByPlaceholderText(/Newcastle Upon Tyne/i);
+        const inputEl = getByTestId('location-search-input');
 
         expect(inputEl).toBeInTheDocument();
         await userEvent.type(inputEl, 'London');

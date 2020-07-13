@@ -33,6 +33,11 @@ const locations = produce((draft: Draft<LocationsState>, action: AllActions) => 
             draft.getLocations.success = true;
             draft.isInitialLoad = false;
             break;
+        case locationsActionTypes.GET_LOCATIONS_FAIL:
+            draft.getLocations.isPending = false;
+            draft.getLocations.success = false;
+            draft.isInitialLoad = false;
+            break;
         case locationsActionTypes.SEARCH_LOCATION_REQUEST:
             draft.searchLocation.isPending = true;
             draft.searchLocation.success = false;

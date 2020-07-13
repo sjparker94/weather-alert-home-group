@@ -1,13 +1,13 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { getName } from 'country-list';
 
-import AppState from '../../interfaces/AppState';
 import SearchLocationState from '../../interfaces/SearchLocationState';
 import ButtonLeftRightWrapper from '../Button/ButtonLeftRightWrapper';
 import Button from '../Button/Button';
 import { addLocation, searchLocationCancel } from '../../actions/locationsActions';
+import useShallowEqualSelector from '../../hooks/useShallowEqualSelector';
 
 const ConfirmLocationBlockStyles = styled.div`
     ${props => props.theme.lastItemMargin}
@@ -35,7 +35,8 @@ const ConfirmLocationBlockStyles = styled.div`
 /** When a user searches for a result and it returns a location check if it is the result they wanted */
 const ConfirmLocationBlock: React.FC = () => {
     const dispatch = useDispatch();
-    const { data } = useSelector<AppState, SearchLocationState>(
+
+    const { data } = useShallowEqualSelector<SearchLocationState>(
         state => state.locations.searchLocation
     );
 
@@ -60,10 +61,20 @@ const ConfirmLocationBlock: React.FC = () => {
                 <p className="country">{getName(data.sys.country)}</p>
             </div>
             <ButtonLeftRightWrapper>
-                <Button fullWidth colorTheme="white" onClick={handleCancel} data-testid="cancel-search-button">
+                <Button
+                    fullWidth
+                    colorTheme="white"
+                    onClick={handleCancel}
+                    data-testid="cancel-search-button"
+                >
                     No (cancel)
                 </Button>
-                <Button fullWidth colorTheme="secondary" onClick={handleConfirm} data-testid="confirm-search-button">
+                <Button
+                    fullWidth
+                    colorTheme="secondary"
+                    onClick={handleConfirm}
+                    data-testid="confirm-search-button"
+                >
                     Yes, add to favourites
                 </Button>
             </ButtonLeftRightWrapper>

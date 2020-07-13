@@ -48,21 +48,14 @@ describe('locations actions', () => {
             name: 'Newcastle upon Tyne',
         });
 
-        // These will be returned in the fetch mocking new updated weather data
-        const returnMockLocation1 = fakeLocation({
-            name: 'Newcastle upon Tyne',
-        });
-        returnMockLocation1.main.temp = 10;
-        const returnMockLocation2 = fakeLocation({
-            name: 'London',
-        });
-        returnMockLocation2.main.temp = 20;
-
         const store = mockStore({});
 
-        axios.get = jest
-            .fn()
-            .mockResolvedValue({ data: [returnMockLocation1, returnMockLocation2] });
+        axios.get = jest.fn().mockResolvedValue({
+            data: {
+                cnt: 2,
+                list: [mockLocation, anotherMockLocation],
+            },
+        });
 
         const expectedActions = [
             { type: locationsActionTypes.GET_LOCATIONS_REQUEST },
@@ -92,7 +85,7 @@ describe('locations actions', () => {
             { type: locationsActionTypes.GET_LOCATIONS_FAIL },
         ];
 
-        await store.dispatch(actions.getLocations([location, anotherMockLocation]) as any);
+        await store.dispatch(actions.getLocations([mockLocation, anotherMockLocation]) as any);
 
         expect(store.getActions()).toEqual(expectedActions);
         expect(axios.get).toBeCalledTimes(1);

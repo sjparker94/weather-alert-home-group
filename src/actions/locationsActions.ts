@@ -3,6 +3,7 @@ import axios from 'axios';
 import * as locationsActionTypes from '../constants/actions';
 import LocationsState from '../interfaces/LocationsState';
 import Location from '../interfaces/Location';
+import MultipleLocationResponse from '../interfaces/MultipleLocationResponse';
 
 export interface GetLocationsRequest extends Action {
     type: typeof locationsActionTypes.GET_LOCATIONS_REQUEST;
@@ -13,7 +14,6 @@ export interface GetLocationsSuccess extends Action {
 }
 export interface GetLocationsFail extends Action {
     type: typeof locationsActionTypes.GET_LOCATIONS_FAIL;
-    payload: string;
 }
 
 export const getLocationsRequest = (): GetLocationsRequest => {
@@ -27,30 +27,32 @@ export const getLocationsSuccess = (locations: Location[]): GetLocationsSuccess 
         payload: locations,
     };
 };
-export const getLocationsFail = (errorMessage: string): GetLocationsFail => {
+export const getLocationsFail = (): GetLocationsFail => {
     return {
         type: locationsActionTypes.GET_LOCATIONS_FAIL,
-        payload: errorMessage,
     };
 };
 
-export const getLocations = () => {
-    return (dispatch: Dispatch) => {
+export const getLocations = (locations: Location[]) => {
+    return async (dispatch: Dispatch) => {
         dispatch(getLocationsRequest());
+        if (!locations.length) {
+            dispatch(getLocationsFail());
+            return;
+        }
         try {
-            const localStorageLocations = localStorage.getItem('locations');
-            const savedLocations = localStorageLocations ? JSON.parse(localStorageLocations) : [];
+            const locationIdString = locations.map(location => location.id).join(',');
 
-            if (!localStorageLocations) {
-                localStorage.setItem('locations', JSON.stringify([]));
-            }
+            const response = await axios.get<MultipleLocationResponse>(
+                `${process.env.REACT_APP_OPENWEATHER_API_URL}group?id=${locationIdString}&units=${
+                    process.env.REACT_APP_OPENWEATHER_API_UNITS
+                }&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}`
+            );
 
-            dispatch(getLocationsSuccess(savedLocations));
-
-            if (savedLocations.length) {
-                // TODO Fetch latest data for each item
-            }
-        } catch (err) {}
+            dispatch(getLocationsSuccess(response.data.list));
+        } catch (err) {
+            dispatch(getLocationsFail());
+        }
     };
 };
 

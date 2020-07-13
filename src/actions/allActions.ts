@@ -13,6 +13,7 @@ import {
 export type AllActions =
     | GetLocationsRequest
     | GetLocationsSuccess
+    | GetLocationsFail
     | SearchLocationRequest
     | SearchLocationSuccess
     | SearchLocationFail

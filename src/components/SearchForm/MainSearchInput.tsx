@@ -10,6 +10,7 @@ interface Props {
     label: string;
     placeholder: string;
     description?: string;
+    forwardedRef: React.RefObject<HTMLInputElement>;
     handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -21,6 +22,7 @@ const MainSearchInput: React.FC<Props> = ({
     label,
     placeholder,
     description,
+    forwardedRef,
 }) => {
     return (
         <MainSearchInputStyles>
@@ -33,6 +35,8 @@ const MainSearchInput: React.FC<Props> = ({
                 placeholder={placeholder}
                 onChange={handleChange}
                 aria-label={label}
+                data-testid="location-search-input"
+                ref={forwardedRef}
             />
             {description && <p className="input-description">{description}</p>}
         </MainSearchInputStyles>

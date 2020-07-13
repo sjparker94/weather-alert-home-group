@@ -7,6 +7,7 @@ import * as serviceWorker from './serviceWorker';
 import configureStore from './store/configureStore';
 import { loadState, saveState } from './utils/localStorage';
 
+// Get any data stored in localStorage
 const persistedState = loadState();
 const store = configureStore(persistedState);
 
