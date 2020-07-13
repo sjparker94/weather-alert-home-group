@@ -122,5 +122,16 @@ export const addLocation = (location: Location): AddLocation => {
     return {
         type: locationsActionTypes.ADD_LOCATION,
         payload: location,
-    } as const;
+    };
+};
+
+export interface RemoveLocation extends Action {
+    type: typeof locationsActionTypes.REMOVE_LOCATION;
+    payload: number;
+}
+export const removeLocation = (locationId: number): RemoveLocation => {
+    return {
+        type: locationsActionTypes.REMOVE_LOCATION,
+        payload: locationId,
+    };
 };

@@ -71,6 +71,14 @@ const locations = produce((draft: Draft<LocationsState>, action: AllActions) => 
             }
             draft.searchLocation.data = null;
             break;
+        case locationsActionTypes.REMOVE_LOCATION:
+            // See if the location exists
+            const locationIdx = draft.data.findIndex(findByProp<Location>('id', action.payload));
+
+            if (locationIdx !== -1) {
+                draft.data.splice(locationIdx, 1);
+            }
+            break;
         default:
             neverReached(action);
     }

@@ -139,6 +139,7 @@ describe('locations reducer', () => {
     });
     it('should handle REMOVE_LOCATION', () => {
         const mockLocationToRemove = fakeLocation({
+            id: 123,
             name: 'Newcastle upon Tyne',
         });
 
@@ -152,7 +153,7 @@ describe('locations reducer', () => {
         expect(
             locationsReducer(initialState, {
                 type: locationsActionTypes.REMOVE_LOCATION,
-                payload: mockLocation.id,
+                payload: mockLocationToRemove.id,
             })
         ).toEqual({
             ...locationsInitialState,

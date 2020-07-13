@@ -7,6 +7,7 @@ import {
     SearchLocationFail,
     SearchLocationCancel,
     AddLocation,
+    RemoveLocation,
 } from './locationsActions';
 
 // export type AllActions = GetLocationsRequest | GetLocationsSuccess | GetLocationsFail;
@@ -18,4 +19,5 @@ export type AllActions =
     | SearchLocationSuccess
     | SearchLocationFail
     | SearchLocationCancel
-    | AddLocation;
+    | AddLocation
+    | RemoveLocation;
