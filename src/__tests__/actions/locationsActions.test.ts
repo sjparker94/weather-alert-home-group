@@ -128,6 +128,15 @@ describe('locations actions', () => {
         expect(actions.addLocation(mockLocation)).toEqual(expectedAction);
     });
 
+    it('should create an action when a location has been removed from favourites', () => {
+        const expectedAction = {
+            type: locationsActionTypes.REMOVE_LOCATION,
+            payload: mockLocation.id,
+        };
+
+        expect(actions.removeLocation(mockLocation.id)).toEqual(expectedAction);
+    });
+
     it('should create an action to start the fetch/search of a location and another action to mark the success of the fetch', async () => {
         const store = mockStore({});
 

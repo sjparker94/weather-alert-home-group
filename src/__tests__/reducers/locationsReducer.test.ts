@@ -137,4 +137,34 @@ describe('locations reducer', () => {
             },
         });
     });
+    it('should handle REMOVE_LOCATION', () => {
+        const mockLocationToRemove = fakeLocation({
+            name: 'Newcastle upon Tyne',
+        });
+
+        // Base initial state with 2 items
+        const initialState = {
+            ...locationsInitialState,
+            data: [mockLocation, mockLocationToRemove],
+        };
+
+        // Removes corrent item from the array of locations
+        expect(
+            locationsReducer(initialState, {
+                type: locationsActionTypes.REMOVE_LOCATION,
+                payload: mockLocation.id,
+            })
+        ).toEqual({
+            ...locationsInitialState,
+            data: [mockLocation],
+        });
+
+        // No change when removing an item that does not exist
+        expect(
+            locationsReducer(undefined, {
+                type: locationsActionTypes.REMOVE_LOCATION,
+                payload: mockLocation.id,
+            })
+        ).toEqual(locationsInitialState);
+    });
 });
