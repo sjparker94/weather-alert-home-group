@@ -21,7 +21,7 @@ const FavouritesSidebar: React.FC = () => {
         if (isInitialLoad) {
             dispatch(getLocations(locationsData));
         }
-    }, [isInitialLoad, locationsData, dispatch]);
+    }, [locationsData, dispatch]);
 
     return (
         <FavouritesSidebarStyles>

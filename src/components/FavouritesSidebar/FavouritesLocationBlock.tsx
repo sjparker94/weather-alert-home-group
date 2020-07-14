@@ -33,10 +33,10 @@ const FavouritesLocationBlock: React.FC<Props> = ({ locationData, isInitialLoad 
     const windSpeedDisplay = Math.round(mpsToMph(wind.speed));
 
     const handleDeleteClick = () => {
-        const confirmed = window.confirm(`Are you sure you want to remove ${name} from favourites`);
-        if (confirmed) {
-            dispatch(removeLocation(id));
-        }
+        // const confirmed = window.confirm(`Are you sure you want to remove ${name} from favourites`);
+        // if (confirmed) {
+        dispatch(removeLocation(id));
+        // }
     };
     return (
         <FavouritesLocationBlockStyles contentGutter="0" data-testid="favourite-location">
@@ -49,13 +49,8 @@ const FavouritesLocationBlock: React.FC<Props> = ({ locationData, isInitialLoad 
             >
                 <span className="material-icons">delete</span>
             </CircleButton>
-            <NavLink to={`/location/${id}`}>
+            <NavLink to={`/location/${id}`} data-testid="favourite-location-link">
                 <div className="location-block-left">
-                    {/* {isInitialLoad ? (
-                        <Loader size={20} color="#FFF" />
-                    ) : (
-                        <img src={`${baseImageUrl}${weather[0].icon}.png`} alt={weather[0].main} />
-                    )} */}
                     {!isInitialLoad && (
                         <img src={`${baseImageUrl}${weather[0].icon}.png`} alt={weather[0].main} />
                     )}

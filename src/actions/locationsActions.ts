@@ -36,7 +36,7 @@ export const getLocationsFail = (): GetLocationsFail => {
 export const getLocations = (locations: Location[]) => {
     return async (dispatch: Dispatch) => {
         dispatch(getLocationsRequest());
-        if (!locations.length) {
+        if (locations.length === 0) {
             dispatch(getLocationsFail());
             return;
         }
