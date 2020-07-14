@@ -1,14 +1,14 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import HomePage from './HomePage';
 import ErrorPage from './ErrorPage';
+import LocationDetailPage from './LocationDetailPage';
 
 const Pages: React.FC = () => {
-    // const { isLoggedIn } = useUser();
-
     return (
         <Switch>
             <Route exact path="/" component={HomePage} />
+            <Route exact path="/location/:id" component={LocationDetailPage} />
             <Route component={ErrorPage} />
         </Switch>
     );

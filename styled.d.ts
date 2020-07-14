@@ -43,6 +43,7 @@ declare module 'styled-components' {
         onDarkTextColor: string;
         onDarkTextColorLight: string;
         pageBg: () => string;
+        favouritesSidebarBg: () => string;
         bodyFontSize: number;
         gutter: string;
         gutterHalf: () => string;

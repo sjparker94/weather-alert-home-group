@@ -3,7 +3,7 @@
 exports[`<App /> renders and matches snapshot 1`] = `
 <div>
   <div
-    class="sc-fzpans EWeVe"
+    class="sc-fznyAO dYQzzH"
   >
     <div
       class="main-page-layout-wrapper"
@@ -82,7 +82,7 @@ exports[`<App /> renders and matches snapshot 1`] = `
         </div>
       </main>
       <div
-        class="sc-fzozJi kFNntR"
+        class="sc-fzozJi jfdNKJ"
       >
         <h2
           class="main-title"

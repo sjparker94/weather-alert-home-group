@@ -99,7 +99,7 @@ describe('<App />', () => {
         expect(inputEl).toBeInTheDocument();
         await userEvent.type(inputEl, 'London');
 
-        await userEvent.click(buttonEl);
+        userEvent.click(buttonEl);
         await wait(() => {
             userEvent.click(getByTestId('cancel-search-button'));
 

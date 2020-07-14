@@ -46,6 +46,9 @@ const theme: DefaultTheme = {
         // return '#fff';
         return this.lightBlueGrey;
     },
+    favouritesSidebarBg(this: DefaultTheme) {
+        return this.darkestBlueGrey;
+    },
     bodyFontSize: 16,
     gutter: '2rem',
     gutterHalf(this: DefaultTheme) {
