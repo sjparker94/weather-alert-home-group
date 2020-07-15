@@ -6,11 +6,14 @@ declare module 'styled-components' {
     export interface DefaultTheme {
         [propName: string]: any;
         primaryColor: string;
+        primaryGradient: BaseThemedCssFunction;
         secondaryColor: string;
         highlightColor: string;
         yellow: string;
         green: string;
+        darkGreen: string;
         red: string;
+        darkRed: string;
         orange: string;
         blue: string;
         teal: string;

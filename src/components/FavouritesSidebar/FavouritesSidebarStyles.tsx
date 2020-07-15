@@ -1,8 +1,11 @@
 import styled from 'styled-components';
+import { math } from 'polished';
 
 const FavouritesSidebarStyles = styled.div`
-    padding: ${props => props.theme.gutter};
+    padding: calc(${props => props.theme.headerHeight} + ${props => props.theme.gutter})
+        ${props => props.theme.gutter} ${props => props.theme.gutter} ${props => props.theme.gutter};
     background-color: ${props => props.theme.favouritesSidebarBg()};
+    overflow-y: auto;
     .star-icon {
         color: ${props => props.theme.yellow};
         transform: rotate(-12deg);
@@ -14,6 +17,11 @@ const FavouritesSidebarStyles = styled.div`
         color: #fff;
     }
     .main-title {
+    }
+    .no-locations-saved {
+        p {
+            color: ${props => props.theme.onDarkTextColor};
+        }
     }
 `;
 

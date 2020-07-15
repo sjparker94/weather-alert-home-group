@@ -10,6 +10,7 @@ import Loader from '../Loader/Loader';
 import { mpsToMph } from '../../utils/conversionUtils';
 import windIcon from '../../assets/icons/wind-icon.svg';
 import tempIcon from '../../assets/icons/temp-icon.svg';
+import { BASE_IMAGE_URL } from '../../constants/siteInfo';
 
 interface Props {
     locationData: Location;
@@ -27,10 +28,11 @@ const FavouritesLocationBlock: React.FC<Props> = ({ locationData, isInitialLoad 
         wind,
         main: { temp },
     } = locationData;
-    const baseImageUrl = 'http://openweathermap.org/img/wn/';
+
     const deleteText = `Remove ${name} from Favourites`;
     const tempDisplay = Math.round(temp);
     const windSpeedDisplay = Math.round(mpsToMph(wind.speed));
+    const isFahrenheit = false;
 
     const handleDeleteClick = () => {
         // const confirmed = window.confirm(`Are you sure you want to remove ${name} from favourites`);
@@ -39,20 +41,30 @@ const FavouritesLocationBlock: React.FC<Props> = ({ locationData, isInitialLoad 
         // }
     };
     return (
-        <FavouritesLocationBlockStyles contentGutter="0" data-testid="favourite-location">
-            <CircleButton
-                onClick={handleDeleteClick}
-                title={deleteText}
-                aria-label={deleteText}
-                data-testid="favourite-delete-button"
-                deleteButton
+        <FavouritesLocationBlockStyles
+            initial={{
+                scale: 0.5,
+                opacity: 0,
+                rotate: 30,
+            }}
+            animate={{
+                opacity: 1,
+                scale: 1,
+                rotate: 0,
+            }}
+            data-testid="favourite-location"
+        >
+            <NavLink
+                to={`/location/${id}`}
+                activeClassName="selected"
+                data-testid="favourite-location-link"
             >
-                <span className="material-icons">delete</span>
-            </CircleButton>
-            <NavLink to={`/location/${id}`} data-testid="favourite-location-link">
                 <div className="location-block-left">
                     {!isInitialLoad && (
-                        <img src={`${baseImageUrl}${weather[0].icon}.png`} alt={weather[0].main} />
+                        <img
+                            src={`${BASE_IMAGE_URL}${weather[0].icon}.png`}
+                            alt={weather[0].main}
+                        />
                     )}
                 </div>
                 <div className="location-block-content">
@@ -63,7 +75,6 @@ const FavouritesLocationBlock: React.FC<Props> = ({ locationData, isInitialLoad 
                         <>
                             <p className="weather-summary-item">
                                 <img src={windIcon} width="30" height="30" alt="Wind speed" />
-
                                 {windSpeedDisplay}
                                 <small>mph</small>
                                 <img
@@ -74,7 +85,7 @@ const FavouritesLocationBlock: React.FC<Props> = ({ locationData, isInitialLoad 
                                     className="temp-icon"
                                 />
                                 {tempDisplay}
-                                <sup>°c</sup>
+                                <sup>{isFahrenheit ? '°F' : '°C'}</sup>
                             </p>
                             {/* <p className="weather-summary-item"> */}
                             {/* </p> */}
@@ -82,6 +93,15 @@ const FavouritesLocationBlock: React.FC<Props> = ({ locationData, isInitialLoad 
                     )}
                 </div>
             </NavLink>
+            <CircleButton
+                onClick={handleDeleteClick}
+                title={deleteText}
+                aria-label={deleteText}
+                data-testid="favourite-delete-button"
+                deleteButton
+            >
+                <span className="material-icons">delete</span>
+            </CircleButton>
         </FavouritesLocationBlockStyles>
     );
 };

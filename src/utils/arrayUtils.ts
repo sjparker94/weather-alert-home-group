@@ -1,6 +1,3 @@
-export function findByProp<T extends Record<string, any>>(
-    prop: string | number,
-    propToFind: string | number | boolean
-) {
+export function findByProp<T, K extends keyof T>(prop: K, propToFind: T[K]) {
     return (item: T) => item[prop] === propToFind;
 }

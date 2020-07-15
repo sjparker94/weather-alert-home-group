@@ -5,6 +5,7 @@ import theme from '../../styles/theme';
 import GlobalStyle from '../../styles/GlobalStyle';
 import FavouritesSidebarStyles from '../FavouritesSidebar/FavouritesSidebarStyles';
 import FavouritesSidebar from '../FavouritesSidebar/FavouritesSidebar';
+import Header from '../Header/Header';
 
 const StyledPage = styled.div`
     position: relative;
@@ -23,6 +24,7 @@ const StyledPage = styled.div`
     }
     .main-page-content {
         flex: 1 1 100%;
+        overflow-y: auto;
     }
     ${FavouritesSidebarStyles} {
         flex: 1 0 35%;
@@ -36,7 +38,7 @@ const PageLayout: React.FC = ({ children }) => {
             <StyledPage>
                 <GlobalStyle />
                 <Meta />
-                {/* <Header /> */}
+                <Header />
                 <div className="main-page-layout-wrapper">
                     <main className="main-page-content">{children}</main>
                     <FavouritesSidebar />

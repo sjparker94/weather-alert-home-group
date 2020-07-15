@@ -4,16 +4,23 @@ import { css, DefaultTheme } from 'styled-components';
 const theme: DefaultTheme = {
     yellow: '#ffcc00',
     green: '#2ECC40',
+    darkGreen: '#2ECC40',
     red: '#E31B3A',
+    darkRed: '#9b2c2c',
     orange: '#ffc04e',
     blue: '#1087EA',
     teal: '#44B2A0',
     purple: '#5851BF',
     black: '#111111',
     grey: '#3A3A3A',
-    primaryColor: '#ffcc00',
-    secondaryColor: '#0D5CC3',
-    highlightColor: '#7D5BA6',
+    primaryColor: '#5e31dc',
+    primaryGradient: css`
+        background: linear-gradient(-213deg, #5e31dc 0%, #3155dc 100%),
+            linear-gradient(32deg, rgba(255, 255, 255, 0.25) 33%, rgba(0, 0, 0, 0.25) 100%);
+    `,
+    // secondaryColor: '#0D5CC3',
+    secondaryColor: '#17a974',
+    highlightColor: '#17a974',
     lightMidGrey: '#d2d2d2',
     lightGrey: '#E1E1E1',
     lightestGrey: '#f3f3f3',
@@ -25,7 +32,8 @@ const theme: DefaultTheme = {
     lightestBlueGrey: '#F7F9FA',
     lightMidBlueGrey: '#dee3e8',
     midBlueGrey: '#cfd7df',
-    blueGrey: '#99abc2',
+    // blueGrey: '#99abc2',
+    blueGrey: '#718096',
     offWhite: '#fdfdfd',
     maxWidth: '1200px',
     singleColWidth: '800px',
@@ -90,7 +98,7 @@ const theme: DefaultTheme = {
     headingFontFamilyString: "'Montserrat', sans-serif",
     fontWeights: ['400', '400i', '600', '700', '700i'],
     headingFontWeights: ['400', '600', '700', '900'],
-    headerHeight: '76px',
+    headerHeight: '64px',
     smoothAnimation: 'cubic-bezier(0.165, 0.84, 0.44, 1)',
     bounceAnimation: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
     slowToQuickAnimation: 'cubic-bezier(1, 0.16, 0.52, 0.94)',
@@ -105,7 +113,7 @@ const theme: DefaultTheme = {
         let marginStyles;
         const useMargin = typeof margin !== 'undefined';
 
-        if (margin && typeof margin === 'number') {
+        if (typeof margin !== undefined && typeof margin === 'number') {
             const marginValue = rem(margin, this.bodyFontSize);
             marginStyles = css`
                 margin-bottom: ${marginValue};

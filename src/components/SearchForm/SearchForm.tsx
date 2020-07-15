@@ -38,7 +38,7 @@ const SearchForm: React.FC = () => {
         if (success) {
             resetForm();
         }
-    }, [success]);
+    }, [success, resetForm]);
 
     useEffect(() => {
         // Focus in on the search input when there is no data

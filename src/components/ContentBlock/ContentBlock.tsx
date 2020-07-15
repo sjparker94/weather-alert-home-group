@@ -28,6 +28,17 @@ export const ContentBlockStyles = styled.div<Props>`
             ${props => props.theme.fontSize(20)}
             ${props => props.theme.font('600')}
         }
+        h2 {
+            ${props => props.theme.fontSize(28)}
+            ${props => props.theme.font('600')}
+        }
+        h4 {
+
+        }
+        svg {
+            vertical-align: bottom;
+            margin-right: 1rem;
+        }
         ${props => {
             const gutterVal = props.contentGutter ? props.contentGutter : props.theme.gutter;
             const smallGutterVal = math(`${gutterVal} / 1.75`);

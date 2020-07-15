@@ -1,24 +1,51 @@
 import styled from 'styled-components';
 import { lighten, darken } from 'polished';
+import { motion } from 'framer-motion';
 
 import { ContentBlockStyles } from '../ContentBlock/ContentBlock';
 import CircleButton from '../CircleButton/CircleButton';
 
-const FavouritesLocationBlockStyles = styled(ContentBlockStyles)`
-    background-color: ${props => lighten(0.05, props.theme.favouritesSidebarBg())};
+const FavouritesLocationBlockStyles = styled(motion.div)`
     position: relative;
-    transition: all 0.25s ${props => props.theme.smoothAnimation};
-    &:hover {
-        transform: translateY(-4px) translateZ(0);
-        box-shadow: ${props => props.theme.hoverBs};
-        background-color: ${props => lighten(0.1, props.theme.favouritesSidebarBg())};
-    }
-    &:active {
-        background-color: ${props => darken(0.025, props.theme.favouritesSidebarBg())};
-        transform: translateY(-4px) translateZ(0);
-        box-shadow: ${props => props.theme.contentBs};
+    margin: 0;
+
+    > a {
+        transition: all 0.25s ${props => props.theme.smoothAnimation};
+        background-color: ${props => lighten(0.05, props.theme.favouritesSidebarBg())};
+        border-radius: ${props => props.theme.mainBorderRadius};
+        ${props => props.theme.lastItemMargin}
+        box-shadow: ${props => props.theme.bs};
+
+        &:hover,
+        &:focus {
+            transform: translateY(-4px) translateZ(0);
+            background-color: ${props => lighten(0.1, props.theme.favouritesSidebarBg())};
+        }
+        &:hover {
+            box-shadow: ${props => props.theme.hoverBs};
+        }
+        &:focus {
+            box-shadow: ${props => props.theme.hoverBs}, inset 4px 0 0 ${props =>
+    props.theme.primaryColor};
+
+        }
+        &:active {
+            background-color: ${props => lighten(0.05, props.theme.favouritesSidebarBg())};
+            transform: translateY(0px) translateZ(0);
+            box-shadow: ${props => props.theme.contentBs};
+        }
+        &.selected {
+            box-shadow: ${props => props.theme.bs}, inset 4px 0 0 ${props =>
+    props.theme.primaryColor};
+        }
     }
     /** Floating button */
+    &:hover {
+        ${CircleButton} {
+            transition: all 0.25s ${props => props.theme.smoothAnimation};
+            transform: translate(50%, calc(-50% - 2px)) translateZ(0);
+        }
+    }
     ${CircleButton} {
         position: absolute;
         top: 0;
@@ -53,7 +80,7 @@ const FavouritesLocationBlockStyles = styled(ContentBlockStyles)`
     .location-name {
         color: ${props => props.theme.onDarkTextColor};
         ${props => props.theme.headingFont('600')}
-        ${props => props.theme.fontSize(18, 4)}
+        ${props => props.theme.fontSize(18, 2)}
     }
     .weather-summary-item {
         color: ${props => props.theme.onDarkTextColor};

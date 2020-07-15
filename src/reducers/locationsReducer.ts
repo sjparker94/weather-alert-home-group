@@ -61,7 +61,7 @@ const locations = produce((draft: Draft<LocationsState>, action: AllActions) => 
             break;
         case locationsActionTypes.ADD_LOCATION:
             // See if the location is already in favourites
-            const currentIdx = draft.data.findIndex(findByProp<Location>('id', action.payload.id));
+            const currentIdx = draft.data.findIndex(findByProp('id', action.payload.id));
 
             if (currentIdx === -1) {
                 draft.data.push(action.payload);
@@ -73,7 +73,7 @@ const locations = produce((draft: Draft<LocationsState>, action: AllActions) => 
             break;
         case locationsActionTypes.REMOVE_LOCATION:
             // See if the location exists
-            const locationIdx = draft.data.findIndex(findByProp<Location>('id', action.payload));
+            const locationIdx = draft.data.findIndex(findByProp('id', action.payload));
 
             if (locationIdx !== -1) {
                 draft.data.splice(locationIdx, 1);

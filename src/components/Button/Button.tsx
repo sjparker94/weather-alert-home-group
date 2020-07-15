@@ -37,15 +37,21 @@ const Button = styled.button<Props>`
     }
     ${({ theme, colorTheme }) => {
         if (colorTheme) {
+            if (colorTheme === 'primary') {
+                return css`
+                    ${theme.primaryGradient}
+                    color: #fff;
+                `;
+            }
             if (theme[`${colorTheme}Color`] || theme[colorTheme]) {
                 const colorToUse = theme[`${colorTheme}Color`] || theme[colorTheme];
                 return css`
-                    background-color: ${colorToUse};
+                    background: ${colorToUse};
                     color: ${readableColor(colorToUse, theme.black, '#fff')};
                 `;
             }
             return css`
-                background-color: #fff;
+                background: #fff;
             `;
         }
     }}
@@ -87,7 +93,7 @@ const Button = styled.button<Props>`
             width: 100%;
         `}
     &:disabled {
-        background-color: ${props => props.theme.midBlueGrey};
+        background: ${props => props.theme.midBlueGrey};
         border-color: ${props => props.theme.mainBorderColor()};
         color: ${props => transparentize(0.4, props.theme.textColor)};
         cursor: not-allowed;

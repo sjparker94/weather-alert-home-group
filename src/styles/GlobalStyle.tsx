@@ -193,6 +193,10 @@ h1,h2,h3,h4,h5,h6 {
 button {
     ${props => props.theme.headingFont('700')}
 }
+sup {
+    vertical-align: super;
+    font-size: 0.7em;
+}
 h1 {
     ${props => css`
         ${props.theme.fontSize(24, props.theme.gutterValue(props.theme.gutterMobile))};

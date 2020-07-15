@@ -35,6 +35,11 @@ const CircleButton = styled(motion.button)<Props>`
                 border-color: ${props.theme.red};
             `}
     }
+    &:focus {
+        box-shadow: ${props => props.theme.contentBs},
+            inset 0 0 0 2px
+                ${props => (props.deleteButton ? props.theme.red : props.theme.primaryColor)};
+    }
     &:active {
         transform: scale(0.97) translateZ(0);
     }
