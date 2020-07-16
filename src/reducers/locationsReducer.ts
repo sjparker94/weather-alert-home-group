@@ -19,6 +19,11 @@ export const locationsInitialState: LocationsState = {
         error: null,
         data: null,
     },
+    getForecast: {
+        isPending: false,
+        success: false,
+        error: null,
+    },
 };
 
 const locations = produce((draft: Draft<LocationsState>, action: AllLocationsActions) => {
@@ -78,6 +83,36 @@ const locations = produce((draft: Draft<LocationsState>, action: AllLocationsAct
             if (locationIdx !== -1) {
                 draft.data.splice(locationIdx, 1);
             }
+            break;
+        case locationsActionTypes.GET_LOCATION_FORECAST_REQUEST:
+            draft.getForecast = {
+                isPending: true,
+                error: null,
+                success: false,
+            };
+            break;
+        case locationsActionTypes.GET_LOCATION_FORECAST_SUCCESS:
+            draft.getForecast = {
+                isPending: false,
+                error: null,
+                success: true,
+            };
+            // See if the location exists
+            const locationToUpdateIdx = draft.data.findIndex(findByProp('id', action.payload.id));
+            // if it does update the forecast element
+            if (locationToUpdateIdx !== -1) {
+                draft.data[locationToUpdateIdx].forecast = action.payload.data;
+            } else {
+                // if it didnt update an item dont set to success
+                draft.getForecast.success = false;
+            }
+            break;
+        case locationsActionTypes.GET_LOCATION_FORECAST_FAIL:
+            draft.getForecast = {
+                isPending: false,
+                error: action.payload,
+                success: false,
+            };
             break;
         default:
             neverReached(action);

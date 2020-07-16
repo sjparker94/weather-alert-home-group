@@ -3,6 +3,8 @@ import axios from 'axios';
 import * as locationsActionTypes from '../constants/actions';
 import Location from '../interfaces/Location';
 import MultipleLocationResponse from '../interfaces/MultipleLocationResponse';
+import ForecastResponse from '../interfaces/ForecastResponse';
+import Forecast from '../interfaces/Forecast';
 
 export interface GetLocationsRequest extends Action {
     type: typeof locationsActionTypes.GET_LOCATIONS_REQUEST;
@@ -140,7 +142,7 @@ export interface GetLocationForecastRequest extends Action {
 }
 interface LocationForecastPayload {
     id: number;
-    data: Location[];
+    data: Forecast[];
 }
 export interface GetLocationForecastSuccess extends Action {
     type: typeof locationsActionTypes.GET_LOCATION_FORECAST_SUCCESS;
@@ -148,4 +150,48 @@ export interface GetLocationForecastSuccess extends Action {
 }
 export interface GetLocationForecastFail extends Action {
     type: typeof locationsActionTypes.GET_LOCATION_FORECAST_FAIL;
+    payload: string;
 }
+
+export const getLocationForecastRequest = (): GetLocationForecastRequest => {
+    return {
+        type: locationsActionTypes.GET_LOCATION_FORECAST_REQUEST,
+    };
+};
+
+export const getLocationForecastSuccess = (
+    payload: LocationForecastPayload
+): GetLocationForecastSuccess => {
+    return {
+        type: locationsActionTypes.GET_LOCATION_FORECAST_SUCCESS,
+        payload,
+    };
+};
+export const getLocationForecastFail = (errorMessage: string): GetLocationForecastFail => {
+    return {
+        type: locationsActionTypes.GET_LOCATION_FORECAST_FAIL,
+        payload: errorMessage,
+    };
+};
+export const getForecast = (cityId: number) => {
+    return async (dispatch: Dispatch) => {
+        dispatch(getLocationForecastRequest());
+
+        try {
+            const response = await axios.get<ForecastResponse>(
+                `${process.env.REACT_APP_OPENWEATHER_API_URL}weather?id=${cityId}&cnt=8&units=${
+                    process.env.REACT_APP_OPENWEATHER_API_UNITS
+                }&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}`
+            );
+            dispatch(
+                getLocationForecastSuccess({
+                    data: response.data.list,
+                    id: cityId,
+                })
+            );
+        } catch (err) {
+            const noResultsMessage = 'Failed to get the forecast data please refresh to try again';
+            dispatch(getLocationForecastFail(noResultsMessage));
+        }
+    };
+};

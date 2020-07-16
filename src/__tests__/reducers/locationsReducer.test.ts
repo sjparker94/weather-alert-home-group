@@ -26,6 +26,11 @@ describe('locations reducer', () => {
                 error: null,
                 data: null,
             },
+            getForecast: {
+                isPending: false,
+                success: false,
+                error: null,
+            },
         });
     });
 
@@ -232,7 +237,7 @@ describe('locations reducer', () => {
         // Updates an existing item successfully
         expect(
             locationsReducer(initialState, {
-                type: locationsActionTypes.GET_LOCATION_FORECAST_FAIL,
+                type: locationsActionTypes.GET_LOCATION_FORECAST_SUCCESS,
                 payload: {
                     id: 123,
                     data: mockForecast,
@@ -243,7 +248,7 @@ describe('locations reducer', () => {
             data: [mockLocation, updatedMockLocation],
             getForecast: {
                 isPending: false,
-                success: false,
+                success: true,
                 error: null,
             },
         });
@@ -251,7 +256,7 @@ describe('locations reducer', () => {
         // fails silently when id doesn't exist in the list
         expect(
             locationsReducer(initialState, {
-                type: locationsActionTypes.GET_LOCATION_FORECAST_FAIL,
+                type: locationsActionTypes.GET_LOCATION_FORECAST_SUCCESS,
                 payload: {
                     id: 456,
                     data: mockForecast,

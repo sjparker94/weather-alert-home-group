@@ -188,15 +188,22 @@ describe('locations actions', () => {
                 data: mockForecastList,
             },
         };
-        expect(actions.getLocationForecastSuccess()).toEqual(expectedAction);
+        expect(
+            actions.getLocationForecastSuccess({
+                id: 123,
+                data: mockForecastList,
+            })
+        ).toEqual(expectedAction);
     });
 
     it('should create an action when get location forecast data has failed', () => {
+        const errorMessage = 'Failed to get the forecast data please refresh to try again';
+
         const expectedAction = {
             type: locationsActionTypes.GET_LOCATION_FORECAST_FAIL,
-            payload: 'Failed to get the forecast data please refresh to try again',
+            payload: errorMessage,
         };
-        expect(actions.getLocationForecastFail()).toEqual(expectedAction);
+        expect(actions.getLocationForecastFail(errorMessage)).toEqual(expectedAction);
     });
 
     it('should create an action to start the get forecast of a location and another action to mark the success of the fetched data', async () => {
@@ -240,7 +247,7 @@ describe('locations actions', () => {
         expect(axios.get).toBeCalledTimes(1);
     });
 
-    it('should create an action to start the fetch/search of a location and another action to mark the failure of the fetch', async () => {
+    it('should create an action to start the get forecast of a location and another action to mark the failure of the fetched data', async () => {
         const errorMessage = 'Failed to get the forecast data please refresh to try again';
         const mockLocationId = 123;
 

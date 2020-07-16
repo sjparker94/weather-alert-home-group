@@ -8,6 +8,9 @@ import {
     SearchLocationCancel,
     AddLocation,
     RemoveLocation,
+    GetLocationForecastRequest,
+    GetLocationForecastSuccess,
+    GetLocationForecastFail,
 } from './locationsActions';
 
 import { SpeedUnitToggle, TemperatureUnitToggle } from './settingsActions';
@@ -24,4 +27,7 @@ export type AllLocationsActions =
     | SearchLocationFail
     | SearchLocationCancel
     | AddLocation
-    | RemoveLocation;
+    | RemoveLocation
+    | GetLocationForecastRequest
+    | GetLocationForecastSuccess
+    | GetLocationForecastFail;
