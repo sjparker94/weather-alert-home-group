@@ -1,31 +1,28 @@
 import React, { useContext } from 'react';
-import styled, { ThemeContext } from 'styled-components';
+import { ThemeContext } from 'styled-components';
 import WindSpeedTextValue from '../../interfaces/WindSpeedTextValue';
 import { capitalizeFirstLetter } from '../../utils/stringUtils';
 import LocationWind from '../../interfaces/LocationWind';
-import { toTextualWindDirection } from '../../utils/conversionUtils';
 import useWindColors from '../../hooks/useWindColors';
 import WindDetailsStyles from './WindDetailsStyles';
+import { toTextualWindDirection, getSpeedDisplayValue } from '../../utils/displayUtils';
+import useShallowEqualSelector from '../../hooks/useShallowEqualSelector';
+import SettingsState from '../../interfaces/SettingsState';
 
 interface Props {
-    /** Wind speed as either mph or kmh */
-    windSpeedValueConverted: number;
-    /** If the setting says display it as kmh */
-    isInKm: boolean;
     /** String value to describe the wind */
     windSpeedText: WindSpeedTextValue;
     /** The raw values returned from openweathermap */
     windApiValues: LocationWind;
 }
 
-const WindDetails: React.FC<Props> = ({
-    windApiValues,
-    windSpeedValueConverted,
-    windSpeedText,
-    isInKm,
-}) => {
+const WindDetails: React.FC<Props> = ({ windApiValues, windSpeedText }) => {
     const { blueGrey } = useContext(ThemeContext);
+    const { isKm } = useShallowEqualSelector<SettingsState>(state => state.settings);
+
+    const windSpeedDisplay = getSpeedDisplayValue(windApiValues.speed, isKm);
     const windColorValues = useWindColors();
+
     return (
         <WindDetailsStyles
             windSpeedText={windSpeedText}
@@ -34,8 +31,10 @@ const WindDetails: React.FC<Props> = ({
         >
             <div className="wind-details-speeds">
                 <div className="value-wrapper">
-                    <h2>{windSpeedValueConverted}</h2>
-                    <span className="units">{isInKm ? 'km/h' : 'mph'}</span>
+                    <h2 data-testid="main-wind-speed-title">{windSpeedDisplay}</h2>
+                    <span className="units" data-testid="speed-units">
+                        {isKm ? 'km/h' : 'mph'}
+                    </span>
                 </div>
                 <div className="direction-wrapper">
                     <svg
@@ -43,6 +42,7 @@ const WindDetails: React.FC<Props> = ({
                         viewBox="0 0 24 24"
                         className="wind-direction-icon"
                         fill={blueGrey}
+                        data-testid="wind-direction-icon"
                     >
                         <path d="M0 0h24v24H0z" fill="none" />
                         <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z" />
@@ -50,8 +50,10 @@ const WindDetails: React.FC<Props> = ({
                 </div>
             </div>
             <div className="wind-details-content">
-                <h3>{capitalizeFirstLetter(windSpeedText)}</h3>
-                <p>{toTextualWindDirection(windApiValues.deg)}</p>
+                <h3 data-testid="wind-speed-text-value">{capitalizeFirstLetter(windSpeedText)}</h3>
+                <p data-testid="wind-direction-text-value">
+                    {toTextualWindDirection(windApiValues.deg)}
+                </p>
             </div>
             <div className="upcoming-wind-details">
                 <h4>Next 24 Hours</h4>

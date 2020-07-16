@@ -9,6 +9,7 @@ const size = {
     mobileL: em('425px', theme.bodyFontSize),
     tablet: em('768px', theme.bodyFontSize),
     laptop: em('1024px', theme.bodyFontSize),
+    laptopM: em('1200px', theme.bodyFontSize),
     laptopL: em('1440px', theme.bodyFontSize),
     desktop: em('2560px', theme.bodyFontSize),
 };
@@ -26,6 +27,8 @@ const device = {
     tabletMin: `(min-width: ${size.tablet})`,
     laptopMax: `(max-width: ${size.laptop})`,
     laptopMin: `(min-width: ${size.laptop})`,
+    laptopMMax: `(max-width: ${size.laptopM})`,
+    laptopMMin: `(min-width: ${size.laptopM})`,
     laptopLMax: `(max-width: ${size.laptopL})`,
     laptopLMin: `(min-width: ${size.laptopL})`,
     desktopMax: `(max-width: ${size.desktop})`,

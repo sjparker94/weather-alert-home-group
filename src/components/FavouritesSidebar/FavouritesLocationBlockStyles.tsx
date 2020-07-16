@@ -3,11 +3,14 @@ import { lighten, darken } from 'polished';
 import { motion } from 'framer-motion';
 
 import CircleButton from '../CircleButton/CircleButton';
+import { device } from '../../styles/breakpoint';
 
 const FavouritesLocationBlockStyles = styled(motion.div)`
     position: relative;
     margin: 0;
-
+    @media ${device.laptopMMax} {
+        margin-bottom: ${props => props.theme.gutterTablet};
+    }
     > a {
         transition: all 0.25s ${props => props.theme.smoothAnimation};
         background-color: ${props => lighten(0.05, props.theme.favouritesSidebarBg())};
@@ -43,6 +46,9 @@ const FavouritesLocationBlockStyles = styled(motion.div)`
         ${CircleButton} {
             transition: all 0.25s ${props => props.theme.smoothAnimation};
             transform: translate(50%, calc(-50% - 2px)) translateZ(0);
+            @media ${device.laptopMMax} {
+                transform: translate(30%, calc(-30% - 2px)) translateZ(0);
+            }
         }
     }
     ${CircleButton} {
@@ -57,6 +63,15 @@ const FavouritesLocationBlockStyles = styled(motion.div)`
         }
         &:active {
             transform: translate(50%, -50%) scale(0.95) translateZ(0);
+        }
+        @media ${device.laptopMMax} {
+            transform: translate(30%, -30%);
+            &:hover {
+                transform: translate(30%, -30%) scale(1.1) translateZ(0);
+            }
+            &:active {
+                transform: translate(30%, -30%) scale(0.95) translateZ(0);
+            }
         }
     }
 
@@ -88,7 +103,7 @@ const FavouritesLocationBlockStyles = styled(motion.div)`
         ${props => props.theme.font('400')}
         img,svg {
             vertical-align: middle;
-            margin-right: 2px;
+            margin: 0 2px;
             opacity: 0.5;
         }
         sup,

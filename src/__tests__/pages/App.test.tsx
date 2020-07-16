@@ -4,11 +4,12 @@ import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom/extend-expect';
 
 // @ts-ignore
-import { render, screen, fireEvent, waitFor, wait, fakeLocation } from '../../utils/testUtils';
+import { render, screen, fireEvent, waitFor, fakeLocation } from '../../utils/testUtils';
 import HomePage from '../../pages/HomePage';
 import App from '../../App';
 import AppState from '../../interfaces/AppState';
 import { locationsInitialState } from '../../reducers/locationsReducer';
+import { settingsInitialState } from '../../reducers/settingsReducer';
 
 jest.mock('axios');
 
@@ -28,7 +29,11 @@ const mockInitalReduxStateWithData: AppState = {
         isInitialLoad: false,
         data: [mockLocation, mockLocation2],
     },
+    settings: {
+        ...settingsInitialState,
+    },
 };
+
 describe('<App />', () => {
     afterEach(() => {
         window.localStorage.removeItem('locations');

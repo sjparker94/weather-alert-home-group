@@ -11,6 +11,8 @@ import LocationDetailSummary from '../components/LocationDetail/LocationDetailSu
 import PageTitleSection from '../components/PageTitleSection/PageTitleSection';
 import { convertToFahrenheit } from '../utils/conversionUtils';
 import { BASE_IMAGE_URL } from '../constants/siteInfo';
+import SettingsState from '../interfaces/SettingsState';
+import { getTempDisplayValue } from '../utils/displayUtils';
 
 interface Params {
     id: string;
@@ -19,6 +21,7 @@ interface Params {
 const LocationDetailPage: React.FC = () => {
     const { id } = useParams<Params>();
     const theme = useContext(ThemeContext);
+    const { isFahrenheit } = useShallowEqualSelector<SettingsState>(state => state.settings);
     const locationData = useShallowEqualSelector<Location | undefined>(state => {
         return state.locations.data.find(findByProp('id', parseInt(id, 10)));
     });
@@ -31,17 +34,12 @@ const LocationDetailPage: React.FC = () => {
         weather,
         main: { temp, feels_like, temp_max, temp_min },
     } = locationData;
-    const isFahrenheit = false;
-    const tempDisplay = Math.round(temp);
-    const feelsLikeDisplay = isFahrenheit
-        ? convertToFahrenheit(Math.round(feels_like))
-        : Math.round(feels_like);
-    const tempMaxDisplay = isFahrenheit
-        ? convertToFahrenheit(Math.round(temp_max))
-        : Math.round(temp_max);
-    const tempMinDisplay = isFahrenheit
-        ? convertToFahrenheit(Math.round(temp_min))
-        : Math.round(temp_min);
+    const tempDisplay = getTempDisplayValue(temp, isFahrenheit);
+
+    const feelsLikeDisplay = getTempDisplayValue(feels_like, isFahrenheit);
+
+    const tempMaxDisplay = getTempDisplayValue(temp_max, isFahrenheit);
+    const tempMinDisplay = getTempDisplayValue(temp_min, isFahrenheit);
     const tempUnitDisplay = isFahrenheit ? '°F' : '°C';
     return (
         <LocationDetailSection>
@@ -89,7 +87,8 @@ const LocationDetailPage: React.FC = () => {
                                 src={`${BASE_IMAGE_URL}${weather[0].icon}.png`}
                                 alt={weather[0].main}
                             />
-                            {tempDisplay} <sup>{tempUnitDisplay}</sup>
+                            {tempDisplay}
+                            <sup data-testid="temp-units">{tempUnitDisplay}</sup>
                         </h3>
                         <p className="feels-like">
                             Feels like {feelsLikeDisplay}
@@ -103,8 +102,6 @@ const LocationDetailPage: React.FC = () => {
             </div>
         </LocationDetailSection>
     );
-
-    // return null;
 };
 
 export default LocationDetailPage;

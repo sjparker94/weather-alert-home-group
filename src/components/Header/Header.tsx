@@ -13,6 +13,7 @@ const HeaderStyles = styled.header`
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 1000;
     border-bottom: 1px solid ${transparentize(0.9, '#fff')};
     height: ${props => props.theme.headerHeight};
     width: 100%;

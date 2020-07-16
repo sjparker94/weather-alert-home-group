@@ -6,6 +6,7 @@ import GlobalStyle from '../../styles/GlobalStyle';
 import FavouritesSidebarStyles from '../FavouritesSidebar/FavouritesSidebarStyles';
 import FavouritesSidebar from '../FavouritesSidebar/FavouritesSidebar';
 import Header from '../Header/Header';
+import { device } from '../../styles/breakpoint';
 
 const StyledPage = styled.div`
     position: relative;
@@ -22,11 +23,11 @@ const StyledPage = styled.div`
         /* grid-template-columns: 1fr minmax(1fr, ${props =>
             props.theme.favouritesSidebarMaxWidth}); */
     }
-    .main-page-content {
-        flex: 1 1 100%;
-        overflow-y: auto;
+    .main-page-content,
+    ${FavouritesSidebarStyles} {
         --scrollbarBG: ${props => props.theme.blueGrey};
         --thumbBG: ${props => props.theme.darkBlueGrey};
+        overflow-y: auto;
         scrollbar-width: thin;
         scrollbar-color: var(--thumbBG) var(--scrollbarBG);
         &::-webkit-scrollbar {
@@ -42,10 +43,20 @@ const StyledPage = styled.div`
             border-radius: 6px;
             border: 3px solid var(--scrollbarBG);
         }
+    }
+    .main-page-content {
+        flex: 1 1 100%;
 
     }
+
     ${FavouritesSidebarStyles} {
-        flex: 1 0 35%;
+        flex: 1 0 600px;
+        overflow-y: auto;
+        --scrollbarBG: ${props => props.theme.lightBlueGrey};
+        --thumbBG: ${props => props.theme.blueGrey};
+        @media ${device.laptopMMax} {
+            flex: 1 0 300px;
+        }
     }
 `;
 

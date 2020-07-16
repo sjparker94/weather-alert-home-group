@@ -6,10 +6,10 @@ import FavouritesLocationBlockStyles from './FavouritesLocationBlockStyles';
 import CircleButton from '../CircleButton/CircleButton';
 import { removeLocation } from '../../actions/locationsActions';
 import Location from '../../interfaces/Location';
-import { mpsToMph } from '../../utils/conversionUtils';
-import windIcon from '../../assets/icons/wind-icon.svg';
-import tempIcon from '../../assets/icons/temp-icon.svg';
 import { BASE_IMAGE_URL } from '../../constants/siteInfo';
+import SettingsState from '../../interfaces/SettingsState';
+import useShallowEqualSelector from '../../hooks/useShallowEqualSelector';
+import { getTempDisplayValue, getSpeedDisplayValue } from '../../utils/displayUtils';
 
 interface Props {
     locationData: Location;
@@ -19,7 +19,7 @@ interface Props {
 
 const FavouritesLocationBlock: React.FC<Props> = ({ locationData, isInitialLoad }) => {
     const dispatch = useDispatch();
-
+    const { isFahrenheit, isKm } = useShallowEqualSelector<SettingsState>(state => state.settings);
     const {
         name,
         id,
@@ -28,9 +28,8 @@ const FavouritesLocationBlock: React.FC<Props> = ({ locationData, isInitialLoad 
         main: { temp },
     } = locationData;
     const deleteText = `Remove ${name} from Favourites`;
-    const tempDisplay = Math.round(temp);
-    const windSpeedDisplay = Math.round(mpsToMph(wind.speed));
-    const isFahrenheit = false;
+    const tempDisplay = getTempDisplayValue(temp, isFahrenheit);
+    const windSpeedDisplay = getSpeedDisplayValue(wind.speed, isKm);
 
     const handleDeleteClick = () => {
         dispatch(removeLocation(id));
@@ -74,8 +73,8 @@ const FavouritesLocationBlock: React.FC<Props> = ({ locationData, isInitialLoad 
                         <>
                             <p className="weather-summary-item">
                                 <svg
-                                    width="30"
-                                    height="30"
+                                    width="26"
+                                    height="26"
                                     version="1.1"
                                     viewBox="0 0 32 32"
                                     xmlns="http://www.w3.org/2000/svg"
@@ -93,10 +92,10 @@ const FavouritesLocationBlock: React.FC<Props> = ({ locationData, isInitialLoad 
                                     </g>
                                 </svg>
                                 {windSpeedDisplay}
-                                <small>mph</small>
+                                <small data-testid="speed-units">{isKm ? 'km/h' : 'mph'}</small>
                                 <svg
-                                    width="26"
-                                    height="26"
+                                    width="22"
+                                    height="22"
                                     version="1.1"
                                     viewBox="0 0 141.732 141.732"
                                     xmlSpace="preserve"
@@ -110,7 +109,7 @@ const FavouritesLocationBlock: React.FC<Props> = ({ locationData, isInitialLoad 
                                     </g>
                                 </svg>
                                 {tempDisplay}
-                                <sup>{isFahrenheit ? '°F' : '°C'}</sup>
+                                <sup data-testid="temp-units">{isFahrenheit ? '°F' : '°C'}</sup>
                             </p>
                         </>
                     )}

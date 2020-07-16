@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { transparentize } from 'polished';
 
 interface Props {
     checked: boolean;
@@ -26,6 +27,10 @@ const ToggleSwitchStyles = styled.div<Props>`
         padding: ${props => props.theme.gutterPercentage(0.25)} ${props =>
     props.theme.gutterPercentage(0.5)};
         color: ${props => props.textColor || '#fff'};
+        cursor: pointer;
+        &:hover {
+            background: ${transparentize(0.9, '#fff')};
+        }
         .toggle-description {
             flex: 1 1 100%;
             ${props => props.theme.lastItemMargin};
