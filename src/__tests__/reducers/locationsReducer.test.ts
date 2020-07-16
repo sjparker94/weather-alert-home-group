@@ -1,8 +1,13 @@
 import locationsReducer, { locationsInitialState } from '../../reducers/locationsReducer';
 import * as locationsActionTypes from '../../constants/actions';
-import { fakeLocation } from '../../utils/testUtils';
+import { fakeLocation, fakeForcastList } from '../../utils/testUtils';
+import Location from '../../interfaces/Location';
 
 const mockLocation = fakeLocation();
+const mockLocation2 = fakeLocation({
+    name: 'Newcastle upon Tyne',
+    id: 123,
+});
 
 describe('locations reducer', () => {
     it('should return the initial state', () => {
@@ -167,5 +172,99 @@ describe('locations reducer', () => {
                 payload: mockLocation.id,
             })
         ).toEqual(locationsInitialState);
+    });
+
+    it('should handle GET_LOCATION_FORECAST_REQUEST', () => {
+        // Base initial state with 2 items
+        const initialState = {
+            ...locationsInitialState,
+            data: [mockLocation, mockLocation2],
+        };
+
+        // isPending should be updated to true
+        expect(
+            locationsReducer(initialState, {
+                type: locationsActionTypes.GET_LOCATION_FORECAST_REQUEST,
+            })
+        ).toEqual({
+            ...locationsInitialState,
+            data: [mockLocation, mockLocation2],
+            getForecast: {
+                isPending: true,
+                success: false,
+                error: null,
+            },
+        });
+    });
+    it('should handle GET_LOCATION_FORECAST_FAIL', () => {
+        // Base initial state with 2 items
+        const initialState = {
+            ...locationsInitialState,
+            data: [mockLocation, mockLocation2],
+        };
+        const errorMessage = 'Failed to get the forecast data please refresh to try again';
+
+        // Error message is updated in state
+        expect(
+            locationsReducer(initialState, {
+                type: locationsActionTypes.GET_LOCATION_FORECAST_FAIL,
+                payload: errorMessage,
+            })
+        ).toEqual({
+            ...locationsInitialState,
+            data: [mockLocation, mockLocation2],
+            getForecast: {
+                isPending: false,
+                success: false,
+                error: errorMessage,
+            },
+        });
+    });
+    it('should handle GET_LOCATION_FORECAST_SUCCESS', () => {
+        // Base initial state with 2 items
+        const initialState = {
+            ...locationsInitialState,
+            data: [mockLocation, mockLocation2],
+        };
+        const mockForecast = fakeForcastList();
+        const updatedMockLocation: Location = { ...mockLocation2, forecast: mockForecast };
+
+        // Updates an existing item successfully
+        expect(
+            locationsReducer(initialState, {
+                type: locationsActionTypes.GET_LOCATION_FORECAST_FAIL,
+                payload: {
+                    id: 123,
+                    data: mockForecast,
+                },
+            })
+        ).toEqual({
+            ...locationsInitialState,
+            data: [mockLocation, updatedMockLocation],
+            getForecast: {
+                isPending: false,
+                success: false,
+                error: null,
+            },
+        });
+
+        // fails silently when id doesn't exist in the list
+        expect(
+            locationsReducer(initialState, {
+                type: locationsActionTypes.GET_LOCATION_FORECAST_FAIL,
+                payload: {
+                    id: 456,
+                    data: mockForecast,
+                },
+            })
+        ).toEqual({
+            ...locationsInitialState,
+            data: [mockLocation, mockLocation2],
+            getForecast: {
+                isPending: false,
+                success: false,
+                error: null,
+            },
+        });
     });
 });

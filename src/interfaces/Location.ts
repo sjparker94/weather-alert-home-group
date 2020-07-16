@@ -1,4 +1,5 @@
 import LocationWind from './LocationWind';
+import Forecast from './Forecast';
 
 interface LocationSys {
     type: number;
@@ -42,6 +43,7 @@ interface Location {
     id: number;
     name: string;
     cod: number;
+    forecast?: Forecast[];
 }
 
 export default Location;

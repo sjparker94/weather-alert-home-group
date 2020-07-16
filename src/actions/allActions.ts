@@ -15,7 +15,7 @@ import { SpeedUnitToggle, TemperatureUnitToggle } from './settingsActions';
 // export type AllActions = GetLocationsRequest | GetLocationsSuccess | GetLocationsFail;
 export type AllSettingsActions = SpeedUnitToggle | TemperatureUnitToggle;
 
-export type AllActions =
+export type AllLocationsActions =
     | GetLocationsRequest
     | GetLocationsSuccess
     | GetLocationsFail

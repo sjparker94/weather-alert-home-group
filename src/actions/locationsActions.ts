@@ -134,3 +134,18 @@ export const removeLocation = (locationId: number): RemoveLocation => {
         payload: locationId,
     };
 };
+
+export interface GetLocationForecastRequest extends Action {
+    type: typeof locationsActionTypes.GET_LOCATION_FORECAST_REQUEST;
+}
+interface LocationForecastPayload {
+    id: number;
+    data: Location[];
+}
+export interface GetLocationForecastSuccess extends Action {
+    type: typeof locationsActionTypes.GET_LOCATION_FORECAST_SUCCESS;
+    payload: LocationForecastPayload;
+}
+export interface GetLocationForecastFail extends Action {
+    type: typeof locationsActionTypes.GET_LOCATION_FORECAST_FAIL;
+}

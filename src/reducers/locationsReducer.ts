@@ -1,10 +1,10 @@
 import produce, { Draft } from 'immer';
+
 import LocationsState from '../interfaces/LocationsState';
 import neverReached from '../utils/neverReached';
-import { AllActions } from '../actions/allActions';
+import { AllLocationsActions } from '../actions/allActions';
 import * as locationsActionTypes from '../constants/actions';
 import { findByProp } from '../utils/arrayUtils';
-import Location from '../interfaces/Location';
 
 export const locationsInitialState: LocationsState = {
     data: [],
@@ -21,7 +21,7 @@ export const locationsInitialState: LocationsState = {
     },
 };
 
-const locations = produce((draft: Draft<LocationsState>, action: AllActions) => {
+const locations = produce((draft: Draft<LocationsState>, action: AllLocationsActions) => {
     switch (action.type) {
         case locationsActionTypes.GET_LOCATIONS_REQUEST:
             draft.getLocations.isPending = true;

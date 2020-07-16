@@ -4,7 +4,8 @@ import configureMockStore from 'redux-mock-store';
 
 import * as locationsActionTypes from '../../constants/actions';
 import * as actions from '../../actions/locationsActions';
-import { fakeLocation } from '../../utils/testUtils';
+import { fakeLocation, fakeForcastList } from '../../utils/testUtils';
+import ForecastResponse from '../../interfaces/ForecastResponse';
 
 jest.mock('axios');
 
@@ -166,6 +167,93 @@ describe('locations actions', () => {
         ];
 
         await store.dispatch(actions.searchLocation('London') as any);
+
+        expect(store.getActions()).toEqual(expectedActions);
+        expect(axios.get).toBeCalledTimes(1);
+    });
+
+    it('should create an action when get location forecast data has started', () => {
+        const expectedAction = {
+            type: locationsActionTypes.GET_LOCATION_FORECAST_REQUEST,
+        };
+
+        expect(actions.getLocationForecastRequest()).toEqual(expectedAction);
+    });
+    it('should create an action when get location forecast data has been successful', () => {
+        const mockForecastList = fakeForcastList();
+        const expectedAction = {
+            type: locationsActionTypes.GET_LOCATION_FORECAST_SUCCESS,
+            payload: {
+                id: 123,
+                data: mockForecastList,
+            },
+        };
+        expect(actions.getLocationForecastSuccess()).toEqual(expectedAction);
+    });
+
+    it('should create an action when get location forecast data has failed', () => {
+        const expectedAction = {
+            type: locationsActionTypes.GET_LOCATION_FORECAST_FAIL,
+            payload: 'Failed to get the forecast data please refresh to try again',
+        };
+        expect(actions.getLocationForecastFail()).toEqual(expectedAction);
+    });
+
+    it('should create an action to start the get forecast of a location and another action to mark the success of the fetched data', async () => {
+        const mockForecastList = fakeForcastList();
+        const store = mockStore({});
+
+        const mockLocationId = 123;
+        const mockApiReturn: ForecastResponse = {
+            cod: '200',
+            message: 0,
+            cnt: 8,
+            list: mockForecastList,
+            city: {
+                id: mockLocationId,
+                name: 'Newcastle upon Tyne',
+                coord: {
+                    lat: 54.9733,
+                    lon: -1.614,
+                },
+                country: 'GB',
+                timezone: 3600,
+                sunrise: 1594871382,
+            },
+        };
+        axios.get = jest.fn().mockResolvedValue({ data: mockApiReturn });
+
+        const expectedActions = [
+            { type: locationsActionTypes.GET_LOCATION_FORECAST_REQUEST },
+            {
+                type: locationsActionTypes.GET_LOCATION_FORECAST_SUCCESS,
+                payload: {
+                    id: mockLocationId,
+                    data: mockForecastList,
+                },
+            },
+        ];
+
+        await store.dispatch(actions.getForecast(mockLocationId) as any);
+
+        expect(store.getActions()).toEqual(expectedActions);
+        expect(axios.get).toBeCalledTimes(1);
+    });
+
+    it('should create an action to start the fetch/search of a location and another action to mark the failure of the fetch', async () => {
+        const errorMessage = 'Failed to get the forecast data please refresh to try again';
+        const mockLocationId = 123;
+
+        const store = mockStore({});
+
+        axios.get = jest.fn().mockRejectedValue(new Error());
+
+        const expectedActions = [
+            { type: locationsActionTypes.GET_LOCATION_FORECAST_REQUEST },
+            { type: locationsActionTypes.GET_LOCATION_FORECAST_FAIL, payload: errorMessage },
+        ];
+
+        await store.dispatch(actions.getForecast(mockLocationId) as any);
 
         expect(store.getActions()).toEqual(expectedActions);
         expect(axios.get).toBeCalledTimes(1);
