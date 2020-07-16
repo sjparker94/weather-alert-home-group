@@ -1,5 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { ThemeContext } from 'styled-components';
+import { useDispatch } from 'react-redux';
 import { useParams, Redirect } from 'react-router-dom';
 import { getName } from 'country-list';
 
@@ -9,22 +10,39 @@ import { findByProp } from '../utils/arrayUtils';
 import LocationDetailSection from '../components/LocationDetail/LocationDetailSection';
 import LocationDetailSummary from '../components/LocationDetail/LocationDetailSummary';
 import PageTitleSection from '../components/PageTitleSection/PageTitleSection';
-import { convertToFahrenheit } from '../utils/conversionUtils';
+import { convertToFahrenheit, mToKm, mToMiles } from '../utils/conversionUtils';
 import { BASE_IMAGE_URL } from '../constants/siteInfo';
 import SettingsState from '../interfaces/SettingsState';
 import { getTempDisplayValue } from '../utils/displayUtils';
+import { getForecast } from '../actions/locationsActions';
+import LocationDataItem from '../components/LocationDetail/LocationDataItem';
+import GetLocationForecastState from '../interfaces/GetLocationForecastState';
+import HourlyForecast from '../components/LocationDetail/HourlyForecast';
+import Loader from '../components/Loader/Loader';
 
 interface Params {
     id: string;
 }
 
 const LocationDetailPage: React.FC = () => {
-    const { id } = useParams<Params>();
+    const dispatch = useDispatch();
     const theme = useContext(ThemeContext);
-    const { isFahrenheit } = useShallowEqualSelector<SettingsState>(state => state.settings);
+    const { id } = useParams<Params>();
+
+    const { isFahrenheit, isKm } = useShallowEqualSelector<SettingsState>(state => state.settings);
     const locationData = useShallowEqualSelector<Location | undefined>(state => {
         return state.locations.data.find(findByProp('id', parseInt(id, 10)));
     });
+    const getForecastData = useShallowEqualSelector<GetLocationForecastState>(
+        state => state.locations.getForecast
+    );
+
+    useEffect(() => {
+        // If there is data and forecast has not been fetched
+        if (id && locationData && !locationData.forecast) {
+            dispatch(getForecast(locationData.id));
+        }
+    }, [dispatch, locationData]);
 
     if (!locationData) {
         return <Redirect to="404" />;
@@ -32,6 +50,8 @@ const LocationDetailPage: React.FC = () => {
 
     const {
         weather,
+        visibility,
+        forecast,
         main: { temp, feels_like, temp_max, temp_min },
     } = locationData;
     const tempDisplay = getTempDisplayValue(temp, isFahrenheit);
@@ -41,6 +61,9 @@ const LocationDetailPage: React.FC = () => {
     const tempMaxDisplay = getTempDisplayValue(temp_max, isFahrenheit);
     const tempMinDisplay = getTempDisplayValue(temp_min, isFahrenheit);
     const tempUnitDisplay = isFahrenheit ? '°F' : '°C';
+
+    const visibilityValue = isKm ? mToKm(visibility).toFixed(2) : mToMiles(visibility).toFixed(2);
+
     return (
         <LocationDetailSection>
             <PageTitleSection>
@@ -99,6 +122,33 @@ const LocationDetailPage: React.FC = () => {
             </PageTitleSection>
             <div className="content-wrapper">
                 <LocationDetailSummary locationData={locationData} />
+                <h2>Current Details</h2>
+                <div className="cols-wrapper">
+                    <LocationDataItem
+                        title="Summary"
+                        value={locationData.weather[0].main}
+                        description={locationData.weather[0].description}
+                    />
+                    <LocationDataItem
+                        title="Humidity"
+                        value={`${locationData.main.humidity}`}
+                        description="%"
+                    />
+                    <LocationDataItem
+                        title="Visibility"
+                        value={`${visibilityValue}`}
+                        description={isKm ? 'km' : 'miles'}
+                    />
+                </div>
+                {!getForecastData.isPending && getForecastData.success && forecast ? (
+                    <HourlyForecast
+                        forecast={forecast}
+                        isFahrenheit={isFahrenheit}
+                        tempUnitDisplay={tempUnitDisplay}
+                    />
+                ) : (
+                    <Loader />
+                )}
             </div>
         </LocationDetailSection>
     );

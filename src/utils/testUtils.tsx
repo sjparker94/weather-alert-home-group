@@ -83,7 +83,7 @@ const fakeForecast = (edits?: Partial<Forecast>): Forecast => ({
     sys: {
         pod: 'd',
     },
-    dt_text: '2020-01-16 00:00:00',
+    dt_txt: '2020-01-16 00:00:00',
     ...edits,
 });
 
@@ -96,7 +96,7 @@ export const fakeForcastList = () => {
         const timeStamp = getTime(newDate);
         const dateFormatted = format(newDate, 'yyyy-LL-dd HH:mm:ss');
         return fakeForecast({
-            dt_text: dateFormatted,
+            dt_txt: dateFormatted,
             dt: timeStamp,
         });
     });

@@ -6,7 +6,7 @@ interface ForecastSys {
 type Forecast = Pick<Location, 'dt' | 'main' | 'weather' | 'clouds' | 'wind'> & {
     sys: ForecastSys;
     dt: number;
-    dt_text: string;
+    dt_txt: string;
 };
 
 export default Forecast;

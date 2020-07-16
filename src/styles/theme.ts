@@ -47,7 +47,7 @@ const theme: DefaultTheme = {
     0 14.4px 10.8px rgba(0, 0, 0, 0.025), 0 25.7px 19.2px rgba(0, 0, 0, 0.03),
     0 48px 35.9px rgba(0, 0, 0, 0.036), 0 115px 86px rgba(0, 0, 0, 0.05)`,
     textColor: '#0c344b',
-    lightTextColor: '#717171',
+    lightTextColor: '#718096',
     onDarkTextColor: '#eff3f5',
     onDarkTextColorLight: '#8fa6b2',
     pageBg(this: DefaultTheme) {

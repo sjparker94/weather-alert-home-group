@@ -58,7 +58,7 @@ const ToggleSwitchStyles = styled.div<Props>`
                 .toggle-slide-element {
                     height: ${totalHeight}px;
                     width: ${totalWidth}px;
-                    border: ${outerBorderWidth}px solid ${props.theme.formBorderColor()};
+                    border: ${outerBorderWidth}px solid #fff;
                     padding: ${outerPaddingWidth}px;
                 }
                 .toggle-circle {
@@ -79,7 +79,7 @@ const ToggleSwitchStyles = styled.div<Props>`
             align-items: center;
             justify-content: center;
             transition: transform 0.25s ${props => props.theme.smoothAnimation};
-            background-color: ${props => props.theme.formBorderColor()};
+            background-color: #fff;
             color: ${props => props.theme.textColor};
             ${props => props.theme.font('600')}
         }

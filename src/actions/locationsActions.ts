@@ -179,7 +179,7 @@ export const getForecast = (cityId: number) => {
 
         try {
             const response = await axios.get<ForecastResponse>(
-                `${process.env.REACT_APP_OPENWEATHER_API_URL}weather?id=${cityId}&cnt=8&units=${
+                `${process.env.REACT_APP_OPENWEATHER_API_URL}forecast?id=${cityId}&cnt=8&units=${
                     process.env.REACT_APP_OPENWEATHER_API_UNITS
                 }&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}`
             );

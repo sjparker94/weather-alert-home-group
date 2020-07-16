@@ -74,6 +74,9 @@ const WindDetailsStyles = styled.div<WindStyleProp>`
             justify-content: space-between;
             ${props => props.theme.font('600')}
             ${props => props.theme.fontSize(12)}
+            &:not(:last-child) {
+                margin-bottom: ${props => props.theme.gutterPercentage(0.125)};
+            }
         }
         .time {
             color: ${props => props.theme.lightTextColor};

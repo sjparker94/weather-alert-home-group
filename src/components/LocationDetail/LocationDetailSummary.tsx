@@ -41,7 +41,11 @@ const LocationDetailSummary: React.FC<Props> = ({ locationData }) => {
                 </div>
                 <h4>Wind Conditions</h4>
             </ContentBlockHeader>
-            <WindDetails windApiValues={wind} windSpeedText={windSpeedText} />
+            <WindDetails
+                windApiValues={wind}
+                windSpeedText={windSpeedText}
+                forecast={locationData.forecast}
+            />
         </LocationDetailSummaryStyles>
     );
 };
