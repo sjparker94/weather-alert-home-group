@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { lighten, darken } from 'polished';
 import { motion } from 'framer-motion';
 
-import { ContentBlockStyles } from '../ContentBlock/ContentBlock';
 import CircleButton from '../CircleButton/CircleButton';
 
 const FavouritesLocationBlockStyles = styled(motion.div)`

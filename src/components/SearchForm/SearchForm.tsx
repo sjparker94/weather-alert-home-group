@@ -1,30 +1,32 @@
 import React, { useEffect, useRef } from 'react';
-import SearchFormWrapper from './SearchFormWrapper';
-import Button from '../Button/Button';
-import { useDispatch, useSelector } from 'react-redux';
-import MainSearchInput from './MainSearchInput';
-import useForm from '../../hooks/useForm';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+
+import Button from '../Button/Button';
+import MainSearchInput from './MainSearchInput';
 import { searchLocation } from '../../actions/locationsActions';
 import ErrorAlertBox from '../ErrorAlertBox/ErrorAlertBox';
-import AppState from '../../interfaces/AppState';
 import SearchLocationState from '../../interfaces/SearchLocationState';
+import useShallowEqualSelector from '../../hooks/useShallowEqualSelector';
 
 const SearchFormStyles = styled.form`
     ${props => props.theme.lastItemMargin}
     margin-bottom: ${props => props.theme.gutter};
 `;
 
-const SearchForm: React.FC = () => {
+interface Props {
+    inputs: {
+        city: string;
+    };
+    handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+const SearchForm: React.FC<Props> = ({ inputs, handleChange }) => {
     const dispatch = useDispatch();
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const { isPending, error, success, data } = useSelector<AppState, SearchLocationState>(
+    const { isPending, error, data } = useShallowEqualSelector<SearchLocationState>(
         state => state.locations.searchLocation
     );
-    const { inputs, handleChange, resetForm } = useForm({
-        city: '',
-    });
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -32,13 +34,6 @@ const SearchForm: React.FC = () => {
             dispatch(searchLocation(inputs.city));
         }
     };
-
-    useEffect(() => {
-        // After a successful search clear the form
-        if (success) {
-            resetForm();
-        }
-    }, [success, resetForm]);
 
     useEffect(() => {
         // Focus in on the search input when there is no data

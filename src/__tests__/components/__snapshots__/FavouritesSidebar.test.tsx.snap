@@ -3,7 +3,7 @@
 exports[`<FavouritesSidebar /> renders with 2 locations and matches snapshot 1`] = `
 <div>
   <div
-    class="sc-AxjAm rwZHs"
+    class="sc-AxjAm hUiZoz"
   >
     <h2
       class="main-title"
@@ -19,21 +19,10 @@ exports[`<FavouritesSidebar /> renders with 2 locations and matches snapshot 1`]
       class="sc-AxirZ iqalEU"
     >
       <div
-        class="sc-AxhCb sc-AxgMl krnpiw"
+        class="sc-AxhCb leTKVX"
         data-testid="favourite-location"
+        style="opacity: 1; transform: none;"
       >
-        <button
-          aria-label="Remove London from Favourites"
-          class="sc-AxhUy ckRAsJ"
-          data-testid="favourite-delete-button"
-          title="Remove London from Favourites"
-        >
-          <span
-            class="material-icons"
-          >
-            delete
-          </span>
-        </button>
         <a
           data-testid="favourite-location-link"
           href="/location/2643743"
@@ -76,21 +65,16 @@ exports[`<FavouritesSidebar /> renders with 2 locations and matches snapshot 1`]
               />
               23
               <sup>
-                °c
+                °C
               </sup>
             </p>
           </div>
         </a>
-      </div>
-      <div
-        class="sc-AxhCb sc-AxgMl krnpiw"
-        data-testid="favourite-location"
-      >
         <button
-          aria-label="Remove Newcastle upon Tyne from Favourites"
-          class="sc-AxhUy ckRAsJ"
+          aria-label="Remove London from Favourites"
+          class="sc-AxiKw kpkgEV"
           data-testid="favourite-delete-button"
-          title="Remove Newcastle upon Tyne from Favourites"
+          title="Remove London from Favourites"
         >
           <span
             class="material-icons"
@@ -98,6 +82,12 @@ exports[`<FavouritesSidebar /> renders with 2 locations and matches snapshot 1`]
             delete
           </span>
         </button>
+      </div>
+      <div
+        class="sc-AxhCb leTKVX"
+        data-testid="favourite-location"
+        style="opacity: 1; transform: none;"
+      >
         <a
           data-testid="favourite-location-link"
           href="/location/123"
@@ -140,11 +130,23 @@ exports[`<FavouritesSidebar /> renders with 2 locations and matches snapshot 1`]
               />
               23
               <sup>
-                °c
+                °C
               </sup>
             </p>
           </div>
         </a>
+        <button
+          aria-label="Remove Newcastle upon Tyne from Favourites"
+          class="sc-AxiKw kpkgEV"
+          data-testid="favourite-delete-button"
+          title="Remove Newcastle upon Tyne from Favourites"
+        >
+          <span
+            class="material-icons"
+          >
+            delete
+          </span>
+        </button>
       </div>
     </div>
   </div>
@@ -154,7 +156,7 @@ exports[`<FavouritesSidebar /> renders with 2 locations and matches snapshot 1`]
 exports[`<FavouritesSidebar /> renders with no locations and matches snapshot 1`] = `
 <div>
   <div
-    class="sc-AxjAm rwZHs"
+    class="sc-AxjAm hUiZoz"
   >
     <h2
       class="main-title"

@@ -9,7 +9,6 @@ import { render, waitFor, fakeLocation, fireEvent, screen } from '../../utils/te
 import FavouritesSidebar from '../../components/FavouritesSidebar/FavouritesSidebar';
 import AppState from '../../interfaces/AppState';
 import { locationsInitialState } from '../../reducers/locationsReducer';
-import { createMemoryHistory } from 'history';
 
 jest.mock('axios');
 
@@ -41,7 +40,7 @@ describe('<FavouritesSidebar />', () => {
     });
 
     it('renders with 2 locations with fetching state before latest data is there', async () => {
-        const { container } = render(
+        render(
             <Router>
                 <FavouritesSidebar />
             </Router>,
@@ -68,8 +67,6 @@ describe('<FavouritesSidebar />', () => {
         expect(tempIcons).toHaveLength(2);
 
         expect(container).toMatchSnapshot();
-
-        // TODO check that the
     });
 
     it('removes location when the delete button is pressed', async () => {

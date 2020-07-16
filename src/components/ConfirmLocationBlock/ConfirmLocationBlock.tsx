@@ -31,9 +31,11 @@ const ConfirmLocationBlockStyles = styled.div`
         }
     }
 `;
-
+interface Props {
+    resetForm: () => void;
+}
 /** When a user searches for a result and it returns a location check if it is the result they wanted */
-const ConfirmLocationBlock: React.FC = () => {
+const ConfirmLocationBlock: React.FC<Props> = ({ resetForm }) => {
     const dispatch = useDispatch();
 
     const { data } = useShallowEqualSelector<SearchLocationState>(
@@ -44,9 +46,11 @@ const ConfirmLocationBlock: React.FC = () => {
         if (data) {
             dispatch(addLocation(data));
         }
+        resetForm();
     };
     const handleCancel = () => {
         dispatch(searchLocationCancel());
+        resetForm();
     };
 
     if (!data) {

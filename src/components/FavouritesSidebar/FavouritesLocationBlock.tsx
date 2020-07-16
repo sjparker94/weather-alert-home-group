@@ -1,12 +1,11 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import FavouritesLocationBlockStyles from './FavouritesLocationBlockStyles';
 import CircleButton from '../CircleButton/CircleButton';
 import { removeLocation } from '../../actions/locationsActions';
 import Location from '../../interfaces/Location';
-import Loader from '../Loader/Loader';
 import { mpsToMph } from '../../utils/conversionUtils';
 import windIcon from '../../assets/icons/wind-icon.svg';
 import tempIcon from '../../assets/icons/temp-icon.svg';
@@ -35,18 +34,19 @@ const FavouritesLocationBlock: React.FC<Props> = ({ locationData, isInitialLoad 
     const isFahrenheit = false;
 
     const handleDeleteClick = () => {
-        // const confirmed = window.confirm(`Are you sure you want to remove ${name} from favourites`);
-        // if (confirmed) {
         dispatch(removeLocation(id));
-        // }
     };
     return (
         <FavouritesLocationBlockStyles
-            initial={{
-                scale: 0.5,
-                opacity: 0,
-                rotate: 30,
-            }}
+            initial={
+                isInitialLoad
+                    ? false
+                    : {
+                          scale: 0.5,
+                          opacity: 0,
+                          rotate: 30,
+                      }
+            }
             animate={{
                 opacity: 1,
                 scale: 1,
@@ -87,8 +87,6 @@ const FavouritesLocationBlock: React.FC<Props> = ({ locationData, isInitialLoad 
                                 {tempDisplay}
                                 <sup>{isFahrenheit ? '°F' : '°C'}</sup>
                             </p>
-                            {/* <p className="weather-summary-item"> */}
-                            {/* </p> */}
                         </>
                     )}
                 </div>
