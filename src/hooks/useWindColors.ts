@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { ThemeContext, DefaultTheme } from 'styled-components';
+import { ThemeContext } from 'styled-components';
 import WindColorsMap from '../interfaces/WindColorsMap';
 
 /** returns a map of color values to use to style the wind variations */

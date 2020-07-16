@@ -25,6 +25,24 @@ const StyledPage = styled.div`
     .main-page-content {
         flex: 1 1 100%;
         overflow-y: auto;
+        --scrollbarBG: ${props => props.theme.blueGrey};
+        --thumbBG: ${props => props.theme.darkBlueGrey};
+        scrollbar-width: thin;
+        scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+        &::-webkit-scrollbar {
+            width: 12px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+        }
+        &::-webkit-scrollbar-track {
+            background: var(--scrollbarBG);
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: var(--thumbBG) ;
+            border-radius: 6px;
+            border: 3px solid var(--scrollbarBG);
+        }
+
     }
     ${FavouritesSidebarStyles} {
         flex: 1 0 35%;

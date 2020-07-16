@@ -21,9 +21,10 @@ const PageTitleSection = styled.section`
     h1 {
         color: #fff;
         ${props => props.theme.fontSize(64, 8)}
+        text-shadow: 2px 2px 20px ${transparentize(0.7, '#000')};
     }
     h3 {
-        color: ${transparentize(0.3, '#000')};
+        color: ${transparentize(0.2, '#000')};
     }
     .page-title-left-right-wrapper {
         display: flex;

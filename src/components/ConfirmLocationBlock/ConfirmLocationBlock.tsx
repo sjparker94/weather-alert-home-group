@@ -11,16 +11,22 @@ import useShallowEqualSelector from '../../hooks/useShallowEqualSelector';
 
 const ConfirmLocationBlockStyles = styled.div`
     ${props => props.theme.lastItemMargin}
-    padding: ${props => props.theme.gutterHalf()};
     background-color: ${props => props.theme.lightestGrey};
-    box-shadow: ${props => props.theme.smallBs};
+    border-radius: ${props => props.theme.mainBorderRadius};
+    .heading-block,
+    .location-details {
+        padding: ${props => props.theme.gutterPercentage(0.5)};
+        ${props => props.theme.lastItemMargin}
+
+    }
+    .heading-block {
+        border-bottom: 1px solid ${props => props.theme.mainBorderColor()};
+    }
     h3 {
-        ${props => props.theme.font('600')}
-        ${props => props.theme.fontSize(18)}
+        ${props => props.theme.headingFont('600')}
+        ${props => props.theme.fontSize(16)}
     }
     .location-details {
-        ${props => props.theme.lastItemMargin}
-        margin-bottom: ${props => props.theme.gutterHalf()};
         h2 {
             ${props => props.theme.font('600')}
             ${props => props.theme.fontSize(24, 7)}
@@ -59,29 +65,31 @@ const ConfirmLocationBlock: React.FC<Props> = ({ resetForm }) => {
 
     return (
         <ConfirmLocationBlockStyles>
-            <h3>Would you like to add this city to favourites?</h3>
+            <div className="heading-block">
+                <h3>Would you like to add this city to favourites?</h3>
+            </div>
             <div className="location-details">
                 <h2>{data.name}</h2>
                 <p className="country">{getName(data.sys.country)}</p>
+                <ButtonLeftRightWrapper>
+                    <Button
+                        fullWidth
+                        colorTheme="white"
+                        onClick={handleCancel}
+                        data-testid="cancel-search-button"
+                    >
+                        No (cancel)
+                    </Button>
+                    <Button
+                        fullWidth
+                        colorTheme="secondary"
+                        onClick={handleConfirm}
+                        data-testid="confirm-search-button"
+                    >
+                        Yes, add to favourites
+                    </Button>
+                </ButtonLeftRightWrapper>
             </div>
-            <ButtonLeftRightWrapper>
-                <Button
-                    fullWidth
-                    colorTheme="white"
-                    onClick={handleCancel}
-                    data-testid="cancel-search-button"
-                >
-                    No (cancel)
-                </Button>
-                <Button
-                    fullWidth
-                    colorTheme="secondary"
-                    onClick={handleConfirm}
-                    data-testid="confirm-search-button"
-                >
-                    Yes, add to favourites
-                </Button>
-            </ButtonLeftRightWrapper>
         </ConfirmLocationBlockStyles>
     );
 };

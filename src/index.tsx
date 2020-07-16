@@ -13,7 +13,7 @@ const store = configureStore(persistedState);
 
 // Subscribe to changes to save the locations added into localStorage
 store.subscribe(() => {
-    saveState(store.getState().locations.data);
+    saveState(store.getState());
 });
 
 ReactDOM.render(

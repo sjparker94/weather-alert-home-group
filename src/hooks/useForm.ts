@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 
-interface FormObject {
-    [key: string]: string | number;
-}
-
+/** Simple form handler to cope with text and select fields
+ * Initialse with object of form state with initial values
+ */
 function useForm<T extends {}>(initial: T) {
     const [inputs, setInputs] = useState(initial);
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-        let { value, name, type } = e.target;
+        let { value, name } = e.target;
         setInputs({
             ...inputs,
             [name]: value,

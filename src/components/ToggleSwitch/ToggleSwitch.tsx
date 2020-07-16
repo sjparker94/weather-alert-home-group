@@ -8,20 +8,41 @@ interface Props {
     handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     checked: boolean;
     size?: number;
+    label?: string;
+    unCheckedString?: string;
+    checkedString?: string;
 }
 
-const ToggleSwitch: React.FC<Props> = ({ name, handleChange, size, checked }) => {
+const ToggleSwitch: React.FC<Props> = ({
+    name,
+    handleChange,
+    size,
+    checked,
+    label,
+    checkedString,
+    unCheckedString,
+}) => {
     return (
         <ToggleSwitchStyles checked={checked} size={size}>
             <label htmlFor={name}>
-                <HiddenCheckbox name={name} id={name} checked={checked} onChange={handleChange} />
+                <HiddenCheckbox
+                    name={name}
+                    id={name}
+                    checked={checked}
+                    onChange={handleChange}
+                    aria-label={label || name}
+                />
                 <div className="toggle-wrapper">
-                    <div className="toggle-description">
-                        <p>Toggle display</p>
-                    </div>
+                    {label && (
+                        <div className="toggle-description">
+                            <p>{label}</p>
+                        </div>
+                    )}
                     <div className="toggle-slide-element">
                         <div className="toggle-circle">
-                            <span>{checked ? 'F' : 'C'}</span>
+                            {(checkedString || unCheckedString) && (
+                                <span>{checked ? checkedString : unCheckedString}</span>
+                            )}
                         </div>
                     </div>
                 </div>

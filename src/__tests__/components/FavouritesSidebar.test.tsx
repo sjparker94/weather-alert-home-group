@@ -58,13 +58,15 @@ describe('<FavouritesSidebar />', () => {
         );
 
         // Wait for the latest data which displays the temperature of each location with icon
-        const tempIcons = await screen.findAllByAltText('Temperature');
+        const tempIcons = await screen.findAllByTitle('Temperature');
+        const windSpeedIcons = await screen.findAllByTitle('Wind Speed');
 
         // Check that both of the mock loactions are in the dom and the weather is displaying
-        expect(screen.queryAllByTestId('favourite-location')).toHaveLength(2);
+        expect(screen.getAllByTestId('favourite-location')).toHaveLength(2);
         expect(screen.getByText(mockLocation.name)).toBeInTheDocument();
         expect(screen.getByText(mockLocation2.name)).toBeInTheDocument();
         expect(tempIcons).toHaveLength(2);
+        expect(windSpeedIcons).toHaveLength(2);
 
         expect(container).toMatchSnapshot();
     });

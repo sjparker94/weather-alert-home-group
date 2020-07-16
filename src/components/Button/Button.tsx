@@ -47,7 +47,10 @@ const Button = styled.button<Props>`
                 const colorToUse = theme[`${colorTheme}Color`] || theme[colorTheme];
                 return css`
                     background: ${colorToUse};
-                    color: ${readableColor(colorToUse, theme.black, '#fff')};
+                    /** If secondaryColor use #fff */
+                    color: ${colorTheme === 'secondary'
+                        ? '#fff'
+                        : readableColor(colorToUse, theme.black, '#fff')};
                 `;
             }
             return css`

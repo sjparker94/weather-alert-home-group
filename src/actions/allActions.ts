@@ -10,7 +10,11 @@ import {
     RemoveLocation,
 } from './locationsActions';
 
+import { SpeedUnitToggle, TemperatureUnitToggle } from './settingsActions';
+
 // export type AllActions = GetLocationsRequest | GetLocationsSuccess | GetLocationsFail;
+export type AllSettingsActions = SpeedUnitToggle | TemperatureUnitToggle;
+
 export type AllActions =
     | GetLocationsRequest
     | GetLocationsSuccess

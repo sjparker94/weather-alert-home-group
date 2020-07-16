@@ -1,7 +1,6 @@
 import { Action, Dispatch } from 'redux';
 import axios from 'axios';
 import * as locationsActionTypes from '../constants/actions';
-import LocationsState from '../interfaces/LocationsState';
 import Location from '../interfaces/Location';
 import MultipleLocationResponse from '../interfaces/MultipleLocationResponse';
 

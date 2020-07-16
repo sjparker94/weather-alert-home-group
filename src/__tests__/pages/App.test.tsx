@@ -44,7 +44,9 @@ describe('<App />', () => {
         render(<App />);
         const inputEl = screen.getByTestId('location-search-input');
         expect(inputEl).toBeInTheDocument();
+
         await userEvent.type(inputEl, 'London');
+
         expect(inputEl).toHaveAttribute('value', 'London');
     });
     it('displays confirm block after a successful search', async () => {
@@ -52,9 +54,8 @@ describe('<App />', () => {
 
         const inputEl = screen.getByPlaceholderText(/Newcastle Upon Tyne/i);
         const buttonEl = screen.getByTestId('main-search-button');
-
         axios.get = jest.fn().mockResolvedValueOnce({ data: mockLocation3 });
-        // expect(inputEl).toBeInTheDocument();
+
         await userEvent.type(inputEl, 'Somewhere else');
         fireEvent.click(buttonEl);
 
@@ -69,15 +70,17 @@ describe('<App />', () => {
         expect(getByText(mockLocation3.name)).toBeInTheDocument();
     });
     it('displays error block after a search failure', async () => {
-        const { getByPlaceholderText, getByTestId } = render(<App />);
+        render(<App />);
         const inputEl = screen.getByPlaceholderText(/Newcastle Upon Tyne/i);
         const buttonEl = screen.getByTestId('main-search-button');
         axios.get = jest.fn().mockRejectedValue(new Error());
+
         await userEvent.type(inputEl, 'lssdk');
         fireEvent.click(buttonEl);
+
         await waitFor(() => {
             // Check that the error is being displayed
-            expect(getByTestId('search-error')).toBeInTheDocument();
+            expect(screen.getByTestId('search-error')).toBeInTheDocument();
         });
     });
     it('handles the cancelling of a location search', async () => {
@@ -85,10 +88,13 @@ describe('<App />', () => {
         const inputEl = getByPlaceholderText(/Newcastle Upon Tyne/i);
         const buttonEl = getByTestId('main-search-button');
         axios.get = jest.fn().mockResolvedValue({ data: mockLocation });
+
         await userEvent.type(inputEl, 'London');
         fireEvent.click(buttonEl);
+
         const cancelButton = await screen.findByTestId('cancel-search-button');
         fireEvent.click(cancelButton);
+
         // Check that the confirm block has been removed from the dom
         expect(screen.queryByText(mockLocation.name)).not.toBeInTheDocument();
     });
@@ -97,10 +103,13 @@ describe('<App />', () => {
         const inputEl = getByPlaceholderText(/Newcastle Upon Tyne/i);
         const buttonEl = getByTestId('main-search-button');
         axios.get = jest.fn().mockResolvedValue({ data: mockLocation });
+
         userEvent.type(inputEl, 'London');
-        userEvent.click(buttonEl);
+        fireEvent.click(buttonEl);
+
         const confirmButton = await screen.findByTestId('confirm-search-button');
         fireEvent.click(confirmButton);
+
         // Get the list of favourites
         const favouriteLocationEls: HTMLElement[] = screen.getAllByTestId('favourite-location');
         // Check that the favourite locations have been updated and now contain an item

@@ -3,7 +3,11 @@ import styled from 'styled-components';
 import { transparentize, lighten } from 'polished';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+
 import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
+import { useDispatch, useSelector } from 'react-redux';
+import AppState from '../../interfaces/AppState';
+import { temperatureUnitToggle, speedUnitToggle } from '../../actions/settingsActions';
 
 const HeaderStyles = styled.header`
     position: absolute;
@@ -15,13 +19,6 @@ const HeaderStyles = styled.header`
     padding: 0 ${props => props.theme.gutter};
     display: flex;
     justify-content: space-between;
-    .header-logo-wrapper {
-        display: flex;
-        align-items: center;
-        a {
-            perspective: 800px;
-        }
-    }
     .logo {
         color: #fff;
         ${props => props.theme.headingFont('700')}
@@ -31,9 +28,18 @@ const HeaderStyles = styled.header`
         transform: rotateY(30deg);
         display: block;
         transition: all 0.75s ${props => props.theme.smoothAnimation};
-        &:hover {
-            /* transform: rotateY(390deg); */
-            transform: rotateY(calc(30deg + 180deg));
+    }
+    .header-logo-wrapper {
+        display: flex;
+        align-items: center;
+        a {
+            perspective: 800px;
+            &:hover {
+                /* transform: rotateY(390deg); */
+                .logo {
+                    transform: rotateY(calc(30deg + 180deg));
+                }
+            }
         }
     }
     .header-setting-wrapper {
@@ -57,14 +63,26 @@ const HeaderStyles = styled.header`
             top: 100%;
             right: 0;
             z-index: 100;
-            width: 200px;
+            width: 220px;
             box-shadow: ${props => props.theme.bs};
             background: ${props => lighten(0.05, props.theme.favouritesSidebarBg())};
         }
     }
 `;
 const Header: React.FC = () => {
+    const dispatch = useDispatch();
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+
+    const isFahrenheit = useSelector<AppState, boolean>(state => state.settings.isFahrenheit);
+    const isKm = useSelector<AppState, boolean>(state => state.settings.isKm);
+
+    const handleIsFarenheitChange = () => {
+        dispatch(temperatureUnitToggle());
+    };
+    const handleIsKmChange = () => {
+        dispatch(speedUnitToggle());
+    };
+
     return (
         <HeaderStyles>
             <div className="header-logo-wrapper">
@@ -103,8 +121,24 @@ const Header: React.FC = () => {
                         }}
                         className="settings-dropdown"
                     >
-                        <p>Hello</p>
-                        {/* <ToggleSwitch name, handleChange size checked  /> */}
+                        <ToggleSwitch
+                            name="isFahrenheit"
+                            handleChange={handleIsFarenheitChange}
+                            size={32}
+                            checked={isFahrenheit}
+                            label="Temperature unit"
+                            checkedString="°F"
+                            unCheckedString="°C"
+                        />
+                        <ToggleSwitch
+                            name="isKm"
+                            handleChange={handleIsKmChange}
+                            size={32}
+                            checked={isKm}
+                            label="Wind speed unit"
+                            checkedString="km/h"
+                            unCheckedString="mph"
+                        />
                     </motion.div>
                 )}
             </div>

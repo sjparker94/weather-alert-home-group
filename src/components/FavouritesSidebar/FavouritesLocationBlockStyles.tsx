@@ -86,7 +86,7 @@ const FavouritesLocationBlockStyles = styled(motion.div)`
         ${props => props.theme.fontSize(24)}
         margin-bottom: 0;
         ${props => props.theme.font('400')}
-        img {
+        img,svg {
             vertical-align: middle;
             margin-right: 2px;
             opacity: 0.5;

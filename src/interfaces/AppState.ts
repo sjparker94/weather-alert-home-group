@@ -1,8 +1,9 @@
 import LocationsState from './LocationsState';
+import SettingsState from './SettingsState';
 
 interface AppState {
     locations: LocationsState;
-    // lastVisited: number;
+    settings: SettingsState;
 }
 
 export default AppState;
