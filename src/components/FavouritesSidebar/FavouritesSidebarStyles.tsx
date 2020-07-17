@@ -16,22 +16,7 @@ const FavouritesSidebarStyles = styled.div`
             padding: ${props => props.theme.gutterTablet};
         }
     }
-    .sidebar-footer {
-        flex: 0 0 auto;
-        ${props => props.theme.lastItemMargin}
-        background-color: ${props => lighten(0.05, props.theme.favouritesSidebarBg())};
-        padding: ${props => props.theme.gutterPercentage(0.25)} ${props => props.theme.gutter};
-        p {
-            color: ${props => props.theme.onDarkTextColorLight};
-            text-align: right;
-            ${props => props.theme.font('600')}
-            ${props => props.theme.fontSize(12)}
-        }
-        @media ${device.laptopMMax} {
-            padding: ${props => props.theme.gutterPercentage(0.25)}
-                ${props => props.theme.gutterTablet};
-        }
-    }
+
     .star-icon {
         color: ${props => props.theme.yellow};
         transform: rotate(-12deg);

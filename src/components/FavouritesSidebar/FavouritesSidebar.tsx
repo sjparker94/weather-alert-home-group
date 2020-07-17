@@ -8,6 +8,7 @@ import useShallowEqualSelector from '../../hooks/useShallowEqualSelector';
 import { getLocations } from '../../actions/locationsActions';
 import Location from '../../interfaces/Location';
 import AppState from '../../interfaces/AppState';
+import FavouritesSidebarFooter from './FavouritesSidebarFooter';
 
 /** Persisted sidebar across all pages showing the users favourites */
 const FavouritesSidebar: React.FC = () => {
@@ -47,9 +48,7 @@ const FavouritesSidebar: React.FC = () => {
                     </div>
                 )}
             </div>
-            <footer className="sidebar-footer">
-                <p>Built by Simon Parker</p>
-            </footer>
+            <FavouritesSidebarFooter />
         </FavouritesSidebarStyles>
     );
 };

@@ -3,10 +3,10 @@
 exports[`<App /> renders and matches snapshot 1`] = `
 <div>
   <div
-    class="sc-fznJRM GQHEi"
+    class="sc-fznWqX foteFV"
   >
     <header
-      class="sc-fznxsB gelsoP"
+      class="sc-fznJRM ihGeLz"
     >
       <div
         class="header-logo-wrapper"
@@ -128,7 +128,7 @@ exports[`<App /> renders and matches snapshot 1`] = `
         </div>
       </main>
       <div
-        class="sc-fzqBZW jzBgmR"
+        class="sc-fzqBZW dgWXPS"
       >
         <div
           class="favourites-wrapper"
@@ -153,10 +153,10 @@ exports[`<App /> renders and matches snapshot 1`] = `
           </div>
         </div>
         <footer
-          class="sidebar-footer"
+          class="sc-fzoXzr dXVXzl"
         >
           <p>
-            Built by Simon Parker
+            Made with ♥ by Simon Parker
           </p>
         </footer>
       </div>

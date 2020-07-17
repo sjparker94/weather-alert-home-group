@@ -3,7 +3,7 @@
 exports[`<FavouritesSidebar /> renders with 2 locations and matches snapshot 1`] = `
 <div>
   <div
-    class="sc-AxjAm dntQbY"
+    class="sc-AxjAm dZMQTj"
   >
     <div
       class="favourites-wrapper"
@@ -232,10 +232,10 @@ exports[`<FavouritesSidebar /> renders with 2 locations and matches snapshot 1`]
       </div>
     </div>
     <footer
-      class="sidebar-footer"
+      class="sc-AxhUy fjcPqH"
     >
       <p>
-        Built by Simon Parker
+        Made with ♥ by Simon Parker
       </p>
     </footer>
   </div>
@@ -245,7 +245,7 @@ exports[`<FavouritesSidebar /> renders with 2 locations and matches snapshot 1`]
 exports[`<FavouritesSidebar /> renders with no locations and matches snapshot 1`] = `
 <div>
   <div
-    class="sc-AxjAm dntQbY"
+    class="sc-AxjAm dZMQTj"
   >
     <div
       class="favourites-wrapper"
@@ -270,10 +270,10 @@ exports[`<FavouritesSidebar /> renders with no locations and matches snapshot 1`
       </div>
     </div>
     <footer
-      class="sidebar-footer"
+      class="sc-AxhUy fjcPqH"
     >
       <p>
-        Built by Simon Parker
+        Made with ♥ by Simon Parker
       </p>
     </footer>
   </div>
