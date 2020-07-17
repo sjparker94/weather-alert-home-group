@@ -1,10 +1,15 @@
 import { convertToFahrenheit, mpsToKmh, mpsToMph } from './conversionUtils';
 import WindSpeedTextValue from '../interfaces/WindSpeedTextValue';
 
-/** calculate which temp value to show based on the settings state */
+/** calculate which temp value to show based on the settings state
+ * @param temp temperature value in celsius
+ */
 export const getTempDisplayValue = (temp: number, isFahrenheit: boolean) =>
     Math.round(isFahrenheit ? convertToFahrenheit(temp) : temp);
 
+/** calculate which temp value to show based on the settings state
+ * @param speed speed value in mps
+ */
 export const getSpeedDisplayValue = (speed: number, isKm: boolean) =>
     Math.round(isKm ? mpsToKmh(speed) : mpsToMph(speed));
 

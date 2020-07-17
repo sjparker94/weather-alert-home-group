@@ -63,7 +63,7 @@ const LocationDetailPage: React.FC = () => {
     const tempMinDisplay = getTempDisplayValue(temp_min, isFahrenheit);
     const tempUnitDisplay = isFahrenheit ? '°F' : '°C';
 
-    const visibilityValue = isKm ? mToKm(visibility).toFixed(2) : mToMiles(visibility).toFixed(2);
+    const visibilityValue = isKm ? mToKm(visibility) : mToMiles(visibility);
 
     return (
         <LocationDetailSection>
