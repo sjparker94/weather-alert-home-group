@@ -6,7 +6,7 @@ exports[`<App /> renders and matches snapshot 1`] = `
     class="sc-fznJRM GQHEi"
   >
     <header
-      class="sc-fznxsB bEvxJP"
+      class="sc-fznxsB gelsoP"
     >
       <div
         class="header-logo-wrapper"
@@ -54,7 +54,7 @@ exports[`<App /> renders and matches snapshot 1`] = `
         class="main-page-content"
       >
         <section
-          class="sc-fzozJi inbYtH"
+          class="sc-fzozJi eRVneo"
         >
           <h1
             class="welcome-heading"

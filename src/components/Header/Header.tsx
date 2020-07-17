@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { transparentize, lighten } from 'polished';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, useViewportScroll, MotionValue } from 'framer-motion';
 
 import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
 import { useDispatch, useSelector } from 'react-redux';
 import AppState from '../../interfaces/AppState';
 import { temperatureUnitToggle, speedUnitToggle } from '../../actions/settingsActions';
 
-const HeaderStyles = styled.header`
+interface Props {
+    scrolled: boolean;
+}
+const HeaderStyles = styled.header<Props>`
     position: absolute;
     top: 0;
     left: 0;
@@ -20,6 +23,11 @@ const HeaderStyles = styled.header`
     padding: 0 ${props => props.theme.gutter};
     display: flex;
     justify-content: space-between;
+    ${props =>
+        props.scrolled &&
+        css`
+            background: ${transparentize(0.75, '#000')};
+        `}
     .logo {
         color: #fff;
         ${props => props.theme.headingFont('700')}
@@ -73,6 +81,7 @@ const HeaderStyles = styled.header`
 const Header: React.FC = () => {
     const dispatch = useDispatch();
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+    const { scrollYProgress } = useViewportScroll();
 
     const isFahrenheit = useSelector<AppState, boolean>(state => state.settings.isFahrenheit);
     const isKm = useSelector<AppState, boolean>(state => state.settings.isKm);
@@ -83,9 +92,8 @@ const Header: React.FC = () => {
     const handleIsKmChange = () => {
         dispatch(speedUnitToggle());
     };
-
     return (
-        <HeaderStyles>
+        <HeaderStyles scrolled={true}>
             <div className="header-logo-wrapper">
                 <Link to="/">
                     <span className="logo">Weather Connect</span>

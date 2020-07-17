@@ -86,7 +86,7 @@ const ConfirmLocationBlock: React.FC<Props> = ({ resetForm }) => {
                         onClick={handleConfirm}
                         data-testid="confirm-search-button"
                     >
-                        Yes, add to favourites
+                        Yes
                     </Button>
                 </ButtonLeftRightWrapper>
             </div>

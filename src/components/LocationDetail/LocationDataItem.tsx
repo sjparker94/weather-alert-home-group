@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import { ContentBlockStyles } from '../ContentBlock/ContentBlock';
 import { capitalizeFirstLetter } from '../../utils/stringUtils';
+import { device } from '../../styles/breakpoint';
 
 const LocationDataItemStyles = styled(ContentBlockStyles)`
 transition: all .25s ${props => props.theme.smoothAnimation};
@@ -17,6 +18,9 @@ transition: all .25s ${props => props.theme.smoothAnimation};
     .value {
         ${props => props.theme.fontSize(40, 0)};
         line-height: 1.4;
+        @media ${device.laptopLMax} {
+            ${props => props.theme.fontSize(32, 0)};
+        }
     }
     .description {
         ${props => props.theme.font('600')}

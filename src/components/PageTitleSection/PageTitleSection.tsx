@@ -1,27 +1,36 @@
 import styled from 'styled-components';
 import { transparentize } from 'polished';
+import { device } from '../../styles/breakpoint';
 
 const PageTitleSection = styled.section`
     padding: calc(
             ${props => props.theme.headerHeight} + ${props => props.theme.gutterPercentage(2)}
         )
         ${props => props.theme.gutterPercentage(2)} ${props => props.theme.gutterPercentage(2)};
-    background: ${props => props.theme.secondaryColor};
-    background: linear-gradient(
-        35deg,
-        rgba(8, 69, 147, 1) 0%,
-        rgba(8, 69, 147, 1) 21%,
-        ${props => props.theme.secondaryColor} 74%,
-        ${props => props.theme.secondaryColor} 74%,
-        ${props => props.theme.secondaryColor} 100%
-    );
-
-    background: linear-gradient(-213deg, #5e31dc 0%, #3155dc 100%),
-        linear-gradient(32deg, rgba(255, 255, 255, 0.25) 33%, rgba(0, 0, 0, 0.25) 100%);
+    ${props => props.theme.primaryGradient};
+    @media ${device.laptopMMax} {
+        padding: calc(
+            ${props => props.theme.headerHeight} + ${props => props.theme.gutter}
+        )
+        ${props => props.theme.gutter} ${props => props.theme.gutterPercentage(2)};
+    }
+    @media ${device.mobileLMax} {
+        padding: calc(
+            ${props => props.theme.headerHeight} + ${props => props.theme.gutterMobile}
+        )
+        ${props => props.theme.gutterMobile} ${props => props.theme.gutterPercentage(2)};
+    }
     h1 {
         color: #fff;
         ${props => props.theme.fontSize(64, 8)}
         text-shadow: 2px 2px 20px ${transparentize(0.7, '#000')};
+        @media ${device.laptopMMax} {
+            ${props => props.theme.fontSize(56, 8)}
+
+        }
+        @media ${device.mobileLMax} {
+            ${props => props.theme.fontSize(48, 8)}
+        }
     }
     h3 {
         color: ${transparentize(0.2, '#000')};

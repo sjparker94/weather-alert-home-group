@@ -3,10 +3,10 @@
 exports[`<LocationDetailPage /> renders with the correct location and matches snapshot 1`] = `
 <div>
   <section
-    class="sc-fzpans juMItK"
+    class="sc-fzpans gdQUzA"
   >
     <section
-      class="sc-fzozJi inbYtH"
+      class="sc-fzozJi eRVneo"
     >
       <div
         class="page-title-left-right-wrapper"
@@ -223,7 +223,7 @@ exports[`<LocationDetailPage /> renders with the correct location and matches sn
         class="cols-wrapper"
       >
         <div
-          class="sc-AxheI sc-fznZeY kJLAmK"
+          class="sc-AxheI sc-fznZeY lgdgpQ"
         >
           <h4>
             Summary
@@ -240,7 +240,7 @@ exports[`<LocationDetailPage /> renders with the correct location and matches sn
           </p>
         </div>
         <div
-          class="sc-AxheI sc-fznZeY kJLAmK"
+          class="sc-AxheI sc-fznZeY lgdgpQ"
         >
           <h4>
             Humidity
@@ -257,7 +257,7 @@ exports[`<LocationDetailPage /> renders with the correct location and matches sn
           </p>
         </div>
         <div
-          class="sc-AxheI sc-fznZeY kJLAmK"
+          class="sc-AxheI sc-fznZeY lgdgpQ"
         >
           <h4>
             Visibility
