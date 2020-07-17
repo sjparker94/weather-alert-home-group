@@ -1,11 +1,20 @@
 import { Action, Dispatch } from 'redux';
 import axios from 'axios';
+import { ThunkAction } from 'redux-thunk';
+
 import * as locationsActionTypes from '../constants/actions';
 import Location from '../interfaces/Location';
 import MultipleLocationResponse from '../interfaces/MultipleLocationResponse';
 import ForecastResponse from '../interfaces/ForecastResponse';
 import Forecast from '../interfaces/Forecast';
+import AppState from '../interfaces/AppState';
 
+export type AppThunk<ReturnType = void> = ThunkAction<
+    ReturnType,
+    AppState,
+    unknown,
+    Action<string>
+>;
 export interface GetLocationsRequest extends Action {
     type: typeof locationsActionTypes.GET_LOCATIONS_REQUEST;
 }
@@ -34,8 +43,8 @@ export const getLocationsFail = (): GetLocationsFail => {
     };
 };
 
-export const getLocations = (locations: Location[]) => {
-    return async (dispatch: Dispatch) => {
+export const getLocations = (locations: Location[]): AppThunk<Promise<void>> => {
+    return async dispatch => {
         dispatch(getLocationsRequest());
         if (locations.length === 0) {
             dispatch(getLocationsFail());
@@ -96,8 +105,8 @@ export const searchLocationCancel = (): SearchLocationCancel => {
     };
 };
 
-export const searchLocation = (cityName: string) => {
-    return async (dispatch: Dispatch) => {
+export const searchLocation = (cityName: string): AppThunk<Promise<void>> => {
+    return async dispatch => {
         dispatch(searchLocationRequest());
 
         try {
@@ -173,8 +182,8 @@ export const getLocationForecastFail = (errorMessage: string): GetLocationForeca
         payload: errorMessage,
     };
 };
-export const getForecast = (cityId: number) => {
-    return async (dispatch: Dispatch) => {
+export const getForecast = (cityId: number): AppThunk<Promise<void>> => {
+    return async dispatch => {
         dispatch(getLocationForecastRequest());
 
         try {
