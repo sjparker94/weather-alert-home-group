@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import WindSpeedTextValue from '../../interfaces/WindSpeedTextValue';
 import WindColorsMap from '../../interfaces/WindColorsMap';
+import { device } from '../../styles/breakpoint';
 
 interface WindStyleProp {
     windSpeedText: WindSpeedTextValue;
@@ -12,8 +13,14 @@ interface WindStyleProp {
 const WindDetailsStyles = styled.div<WindStyleProp>`
     display: flex;
     align-items: center;
+    @media ${device.laptopMMax} {
+        flex-wrap: wrap;
+    }
     .wind-details-speeds {
         flex: 1;
+        @media ${device.laptopMMax} {
+             flex: 1 0 auto;
+        }
         display: flex;
         align-items: center;
         margin-right: ${props => props.theme.gutter};
@@ -53,6 +60,9 @@ const WindDetailsStyles = styled.div<WindStyleProp>`
         ${props => props.theme.lastItemMargin}
         margin-right: ${props => props.theme.gutter};
         flex: 1 1 100%;
+        @media ${device.laptopMMax} {
+            flex: 1 1 40%;
+        }
         h3 {
             ${props => props.theme.fontSize(32, 0)}
         }
@@ -63,9 +73,19 @@ const WindDetailsStyles = styled.div<WindStyleProp>`
     .upcoming-wind-details {
         flex: 1 0 auto;
         ${props => props.theme.lastItemMargin}
+        @media ${device.laptopMMax} {
+            max-width: 150px;
+           margin: ${props => props.theme.gutterPercentage(0.5)} auto 0;
+            flex: 0 0 100%;
+        }
+        @media ${device.laptopMax} {
+        }
         h4 {
             text-align: right;
             ${props => props.theme.fontSize(16, 16)}
+            @media ${device.laptopMax} {
+                text-align: center;
+            }
         }
 
         .wind-item-hourly {

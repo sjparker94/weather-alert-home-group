@@ -3,10 +3,10 @@
 exports[`<App /> renders and matches snapshot 1`] = `
 <div>
   <div
-    class="sc-fznWqX foteFV"
+    class="sc-fznWqX iaIwpR"
   >
     <header
-      class="sc-fznJRM ihGeLz"
+      class="sc-fznJRM gXmBWn"
     >
       <div
         class="header-logo-wrapper"
