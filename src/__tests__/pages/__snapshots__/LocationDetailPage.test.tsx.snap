@@ -3,7 +3,7 @@
 exports[`<LocationDetailPage /> renders with the correct location and matches snapshot 1`] = `
 <div>
   <section
-    class="sc-fzoLsD kLMfgq"
+    class="sc-fzpans juMItK"
   >
     <section
       class="sc-fzozJi inbYtH"
@@ -138,7 +138,7 @@ exports[`<LocationDetailPage /> renders with the correct location and matches sn
           </h4>
         </div>
         <div
-          class="sc-fzplWN kaWHPT"
+          class="sc-fznyAO fYSwPp"
         >
           <div
             class="wind-details-speeds"
@@ -196,45 +196,97 @@ exports[`<LocationDetailPage /> renders with the correct location and matches sn
             class="upcoming-wind-details"
           >
             <h4>
-              Next 24 Hours
+              Upcoming 24 Hours
             </h4>
-            <ul>
-              <li
-                class="wind-item-hourly"
+            <div
+              class="loader-wrapper"
+            >
+              <div
+                aria-busy="true"
+                class="sc-fznKkj dijmJu"
               >
-                <span
-                  class="time"
-                >
-                  20:00
-                </span>
-                <span
-                  class="direction"
-                >
-                  <svg
-                    class="wind-direction-icon"
-                    fill="#718096"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    width="20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M0 0h24v24H0z"
-                      fill="none"
-                    />
-                    <path
-                      d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"
-                    />
-                  </svg>
-                </span>
-                <span
-                  class="speed"
-                >
-                  15
-                </span>
-              </li>
-            </ul>
+                <div
+                  class="dot1"
+                />
+                <div
+                  class="dot2"
+                />
+              </div>
+            </div>
           </div>
+        </div>
+      </div>
+      <h2>
+        Current Details
+      </h2>
+      <div
+        class="cols-wrapper"
+      >
+        <div
+          class="sc-AxheI sc-fznZeY fopswh"
+        >
+          <h4>
+            Summary
+          </h4>
+          <p
+            class="value"
+          >
+            Clouds
+          </p>
+          <p
+            class="description"
+          >
+            Scattered clouds
+          </p>
+        </div>
+        <div
+          class="sc-AxheI sc-fznZeY fopswh"
+        >
+          <h4>
+            Humidity
+          </h4>
+          <p
+            class="value"
+          >
+            31
+          </p>
+          <p
+            class="description"
+          >
+            %
+          </p>
+        </div>
+        <div
+          class="sc-AxheI sc-fznZeY fopswh"
+        >
+          <h4>
+            Visibility
+          </h4>
+          <p
+            class="value"
+          >
+            6.22
+          </p>
+          <p
+            class="description"
+          >
+            miles
+          </p>
+        </div>
+      </div>
+      <div
+        class="loader-wrapper"
+      >
+        <div
+          aria-busy="true"
+          class="sc-fznKkj dijmJu"
+        >
+          <div
+            class="dot1"
+          />
+          <div
+            class="dot2"
+          />
         </div>
       </div>
     </div>

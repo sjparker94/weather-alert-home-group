@@ -19,14 +19,14 @@ const WindDetailsStyles = styled.div<WindStyleProp>`
         margin-right: ${props => props.theme.gutter};
         h2 {
             ${props => props.theme.font('600')}
-            ${props => props.theme.fontSize(56)}
+            ${props => props.theme.fontSize(64)}
             margin: 0;
             color: ${props => props.windColorValues[props.windSpeedText]};
         }
         .units {
             display: block;
             text-align: center;
-            ${props => props.theme.fontSize(12)}
+            ${props => props.theme.fontSize(14)}
             ${props => props.theme.font('600')}
             color: ${props => props.theme.lightTextColor};
         }
@@ -80,6 +80,9 @@ const WindDetailsStyles = styled.div<WindStyleProp>`
         }
         .time {
             color: ${props => props.theme.lightTextColor};
+        }
+        .direction {
+            padding: 0 ${props => props.theme.gutterPercentage(0.125)};
         }
     }
 `;

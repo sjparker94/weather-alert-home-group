@@ -9,7 +9,9 @@ const FavouritesLocationBlockStyles = styled(motion.div)`
     position: relative;
     margin: 0;
     @media ${device.laptopMMax} {
-        margin-bottom: ${props => props.theme.gutterTablet};
+        &:not(:last-child) {
+            margin-bottom: ${props => props.theme.gutterTablet};
+        }
     }
     > a {
         transition: all 0.25s ${props => props.theme.smoothAnimation};

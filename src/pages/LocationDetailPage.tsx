@@ -19,6 +19,7 @@ import LocationDataItem from '../components/LocationDetail/LocationDataItem';
 import GetLocationForecastState from '../interfaces/GetLocationForecastState';
 import HourlyForecast from '../components/LocationDetail/HourlyForecast';
 import Loader from '../components/Loader/Loader';
+import { capitalizeFirstLetter } from '../utils/stringUtils';
 
 interface Params {
     id: string;
@@ -42,10 +43,10 @@ const LocationDetailPage: React.FC = () => {
         if (id && locationData && !locationData.forecast) {
             dispatch(getForecast(locationData.id));
         }
-    }, [dispatch, locationData]);
+    }, [dispatch, id, locationData]);
 
     if (!locationData) {
-        return <Redirect to="404" />;
+        return <Redirect to="/404" />;
     }
 
     const {
@@ -127,7 +128,7 @@ const LocationDetailPage: React.FC = () => {
                     <LocationDataItem
                         title="Summary"
                         value={locationData.weather[0].main}
-                        description={locationData.weather[0].description}
+                        description={capitalizeFirstLetter(locationData.weather[0].description)}
                     />
                     <LocationDataItem
                         title="Humidity"
@@ -147,7 +148,9 @@ const LocationDetailPage: React.FC = () => {
                         tempUnitDisplay={tempUnitDisplay}
                     />
                 ) : (
-                    <Loader />
+                    <div className="loader-wrapper">
+                        <Loader />
+                    </div>
                 )}
             </div>
         </LocationDetailSection>

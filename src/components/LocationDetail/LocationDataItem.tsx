@@ -34,8 +34,8 @@ const LocationDataItem: React.FC<Props> = ({ title, value, description }) => {
     return (
         <LocationDataItemStyles>
             <h4>{title}</h4>
-            <p className="value">{capitalizeFirstLetter(value)}</p>
-            {description && <p className="description">{capitalizeFirstLetter(description)}</p>}
+            <p className="value">{value}</p>
+            {description && <p className="description">{description}</p>}
         </LocationDataItemStyles>
     );
 };

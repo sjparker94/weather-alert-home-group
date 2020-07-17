@@ -29,6 +29,10 @@ const LocationDetailSection = styled.section`
             margin-right: var(--gutter);
         }
     }
+    .loader-wrapper {
+        display: flex;
+        justify-content: center;
+    }
 `;
 
 export default LocationDetailSection;

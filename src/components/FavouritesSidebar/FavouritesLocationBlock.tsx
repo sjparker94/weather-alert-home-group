@@ -27,7 +27,7 @@ const FavouritesLocationBlock: React.FC<Props> = ({ locationData, isInitialLoad 
         wind,
         main: { temp },
     } = locationData;
-    const deleteText = `Remove ${name} from Favourites`;
+    const deleteText = `Remove ${name} from favourites`;
     const tempDisplay = getTempDisplayValue(temp, isFahrenheit);
     const windSpeedDisplay = getSpeedDisplayValue(wind.speed, isKm);
 

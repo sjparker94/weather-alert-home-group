@@ -1,9 +1,10 @@
 import React from 'react';
-import { Router, MemoryRouter, Route } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
 import axios from 'axios';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom/extend-expect';
 import { createMemoryHistory } from 'history';
+
 // @ts-ignore
 import { render, screen, fireEvent, waitFor, fakeLocation } from '../../utils/testUtils';
 import Pages from '../../pages/Pages';
@@ -151,7 +152,6 @@ describe('<LocationDetailPage />', () => {
         fireEvent.click(tempToggle);
         fireEvent.click(speedToggle);
 
-
         // Check the value of wind has changed to correct km/h value
         expect(mainWindSpeedHeading).toHaveTextContent(expectedChangedWindValue);
 
@@ -162,5 +162,27 @@ describe('<LocationDetailPage />', () => {
         tempUnitEls.forEach(el => {
             expect(el).toHaveTextContent(expectedChangedTempUnit);
         });
+    });
+
+    it('redirects to the error page when location is deleted and you are on that page', () => {
+        const history = createMemoryHistory({
+            // id matches one of the items in the mock redux store
+            initialEntries: ['/location/123'],
+        });
+        render(
+            <Router history={history}>
+                <PageLayout>
+                    <Route component={Pages} />
+                </PageLayout>
+            </Router>,
+            mockInitalReduxStateWithData
+        );
+
+        const sidebarDeleteEl = screen.getByRole('button', {
+            name: 'Remove Newcastle upon Tyne from favourites',
+        });
+        fireEvent.click(sidebarDeleteEl);
+
+        expect(history.location.pathname).toBe('/404');
     });
 });

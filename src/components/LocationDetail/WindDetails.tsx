@@ -18,6 +18,8 @@ import GetLocationForecastState from '../../interfaces/GetLocationForecastState'
 import Loader from '../Loader/Loader';
 import Forecast from '../../interfaces/Forecast';
 import { mpsToMph } from '../../utils/conversionUtils';
+import { useSelector } from 'react-redux';
+import AppState from '../../interfaces/AppState';
 
 interface Props {
     /** String value to describe the wind */
@@ -30,9 +32,10 @@ interface Props {
 const WindDetails: React.FC<Props> = ({ windApiValues, windSpeedText, forecast }) => {
     const { blueGrey } = useContext(ThemeContext);
     const { isKm } = useShallowEqualSelector<SettingsState>(state => state.settings);
-    const { error, isPending } = useShallowEqualSelector<GetLocationForecastState>(
+    const { error, isPending, success } = useShallowEqualSelector<GetLocationForecastState>(
         state => state.locations.getForecast
     );
+    const isInitialLoad = useSelector<AppState, boolean>(state => state.locations.isInitialLoad);
 
     const windSpeedDisplay = getSpeedDisplayValue(windApiValues.speed, isKm);
     const windColorValues = useWindColors();
@@ -70,9 +73,14 @@ const WindDetails: React.FC<Props> = ({ windApiValues, windSpeedText, forecast }
                 </p>
             </div>
             <div className="upcoming-wind-details">
-                <h4>Next 24 Hours</h4>
+                <h4>Upcoming 24 Hours</h4>
                 {error && <p>{error}</p>}
-                {forecast && forecast.length > 0 && (
+                {(!forecast || isPending || isInitialLoad) && (
+                    <div className="loader-wrapper">
+                        <Loader />
+                    </div>
+                )}
+                {forecast && !isInitialLoad && success && forecast.length > 0 && (
                     <ul>
                         {forecast.map(item => (
                             <li className="wind-item-hourly">

@@ -25,24 +25,31 @@ const FavouritesSidebar: React.FC = () => {
 
     return (
         <FavouritesSidebarStyles>
-            <h2 className="main-title">
-                <span className="material-icons star-icon">star</span> Your Favourites
-            </h2>
-            {locationsData.length ? (
-                <FavouriteLocationsWrapper>
-                    {locationsData.map(location => (
-                        <FavouritesLocationBlock
-                            key={location.id}
-                            locationData={location}
-                            isInitialLoad={isInitialLoad}
-                        />
-                    ))}
-                </FavouriteLocationsWrapper>
-            ) : (
-                <div className="no-locations-saved" data-testid="favourites-no-locations">
-                    <p>No locations have been selected use the form on the home page to add one</p>
-                </div>
-            )}
+            <div className="favourites-wrapper">
+                <h2 className="main-title">
+                    <span className="material-icons star-icon">star</span> Your Favourites
+                </h2>
+                {locationsData.length ? (
+                    <FavouriteLocationsWrapper>
+                        {locationsData.map(location => (
+                            <FavouritesLocationBlock
+                                key={location.id}
+                                locationData={location}
+                                isInitialLoad={isInitialLoad}
+                            />
+                        ))}
+                    </FavouriteLocationsWrapper>
+                ) : (
+                    <div className="no-locations-saved" data-testid="favourites-no-locations">
+                        <p>
+                            No locations have been selected use the form on the home page to add one
+                        </p>
+                    </div>
+                )}
+            </div>
+            <footer className="sidebar-footer">
+                <p>Built by Simon Parker</p>
+            </footer>
         </FavouritesSidebarStyles>
     );
 };

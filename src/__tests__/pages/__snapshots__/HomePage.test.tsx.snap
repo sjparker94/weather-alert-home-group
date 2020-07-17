@@ -3,10 +3,10 @@
 exports[`<App /> renders and matches snapshot 1`] = `
 <div>
   <div
-    class="sc-fzoLag fFRLkk"
+    class="sc-fznJRM GQHEi"
   >
     <header
-      class="sc-fzoyAV ljrSJx"
+      class="sc-fznxsB bEvxJP"
     >
       <div
         class="header-logo-wrapper"
@@ -88,7 +88,7 @@ exports[`<App /> renders and matches snapshot 1`] = `
                 class="inputs-wrapper"
               >
                 <div
-                  class="sc-AxiKw dssmaA"
+                  class="sc-AxiKw hwsIHP"
                 >
                   <label
                     for="city"
@@ -128,26 +128,37 @@ exports[`<App /> renders and matches snapshot 1`] = `
         </div>
       </main>
       <div
-        class="sc-fznyAO giuNaz"
+        class="sc-fzqBZW jzBgmR"
       >
-        <h2
-          class="main-title"
-        >
-          <span
-            class="material-icons star-icon"
-          >
-            star
-          </span>
-           Your Favourites
-        </h2>
         <div
-          class="no-locations-saved"
-          data-testid="favourites-no-locations"
+          class="favourites-wrapper"
+        >
+          <h2
+            class="main-title"
+          >
+            <span
+              class="material-icons star-icon"
+            >
+              star
+            </span>
+             Your Favourites
+          </h2>
+          <div
+            class="no-locations-saved"
+            data-testid="favourites-no-locations"
+          >
+            <p>
+              No locations have been selected use the form on the home page to add one
+            </p>
+          </div>
+        </div>
+        <footer
+          class="sidebar-footer"
         >
           <p>
-            No locations have been selected use the form on the home page to add one
+            Built by Simon Parker
           </p>
-        </div>
+        </footer>
       </div>
     </div>
   </div>

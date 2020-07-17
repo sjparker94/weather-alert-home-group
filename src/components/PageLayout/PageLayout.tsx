@@ -24,7 +24,7 @@ const StyledPage = styled.div`
             props.theme.favouritesSidebarMaxWidth}); */
     }
     .main-page-content,
-    ${FavouritesSidebarStyles} {
+    ${FavouritesSidebarStyles} .favourites-wrapper {
         --scrollbarBG: ${props => props.theme.blueGrey};
         --thumbBG: ${props => props.theme.darkBlueGrey};
         overflow-y: auto;
@@ -46,14 +46,15 @@ const StyledPage = styled.div`
     }
     .main-page-content {
         flex: 1 1 100%;
-
     }
 
     ${FavouritesSidebarStyles} {
         flex: 1 0 600px;
         overflow-y: auto;
-        --scrollbarBG: ${props => props.theme.lightBlueGrey};
-        --thumbBG: ${props => props.theme.blueGrey};
+        .favourites-wrapper  {
+            --scrollbarBG: ${props => props.theme.lightBlueGrey};
+            --thumbBG: ${props => props.theme.blueGrey};
+        }
         @media ${device.laptopMMax} {
             flex: 1 0 300px;
         }

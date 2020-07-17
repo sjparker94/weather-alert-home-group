@@ -1,30 +1,42 @@
 import styled from 'styled-components';
 import { device } from '../../styles/breakpoint';
+import { lighten } from 'polished';
 
 const FavouritesSidebarStyles = styled.div`
-    padding: calc(${props => props.theme.headerHeight} + ${props => props.theme.gutter})
-        ${props => props.theme.gutter} ${props => props.theme.gutter} ${props => props.theme.gutter};
     background-color: ${props => props.theme.favouritesSidebarBg()};
     overflow-y: auto;
     position: relative;
-    &:before {
-        content: '';
-        top: 0;
-        left: 0;
-        height: ${props => props.theme.headerHeight};
-        width: 100%;
-        background: ${props => props.theme.favouritesSidebarBg()};
-        z-index: 1;
+    padding-top: ${props => props.theme.headerHeight};
+    display: flex;
+    flex-direction: column;
+    .favourites-wrapper {
+        flex: 1;
+        padding: ${props => props.theme.gutter};
+        @media ${device.laptopMMax} {
+            padding: ${props => props.theme.gutterTablet};
+        }
     }
-    @media ${device.laptopMMax} {
-        padding: calc(${props => props.theme.headerHeight} + ${props => props.theme.gutter})
-            ${props => props.theme.gutterTablet} ${props => props.theme.gutterTablet}
-            ${props => props.theme.gutterTablet};
+    .sidebar-footer {
+        flex: 0 0 auto;
+        ${props => props.theme.lastItemMargin}
+        background-color: ${props => lighten(0.05, props.theme.favouritesSidebarBg())};
+        padding: ${props => props.theme.gutterPercentage(0.25)} ${props => props.theme.gutter};
+        p {
+            color: ${props => props.theme.onDarkTextColorLight};
+            text-align: right;
+            ${props => props.theme.font('600')}
+            ${props => props.theme.fontSize(12)}
+        }
+        @media ${device.laptopMMax} {
+            padding: ${props => props.theme.gutterPercentage(0.25)}
+                ${props => props.theme.gutterTablet};
+        }
     }
     .star-icon {
         color: ${props => props.theme.yellow};
         transform: rotate(-12deg);
     }
+
     h1,
     h2,
     h3,
