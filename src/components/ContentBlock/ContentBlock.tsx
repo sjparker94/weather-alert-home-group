@@ -1,16 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { math } from 'polished';
+import { math, lighten } from 'polished';
 import ContentBlockHeader from './ContentBlockHeader';
+import { motion } from 'framer-motion';
 
 interface Props {
     contentGutter?: string;
     headerGutter?: string;
     title?: string;
+    alert?: boolean;
 }
 
-export const ContentBlockStyles = styled.div<Props>`
+export const ContentBlockStyles = styled(motion.div)<Props>`
     padding: ${props => (props.contentGutter ? props.contentGutter : props.theme.gutter)};
     margin-bottom: ${props => props.theme.gutter};
     background-color: #fff;
@@ -18,6 +20,12 @@ export const ContentBlockStyles = styled.div<Props>`
     ${props => props.theme.lastItemMargin}
     box-shadow: ${props => props.theme.contentBs};
     box-shadow: ${props => props.theme.bs};
+    ${props =>
+        props.alert &&
+        css`
+            box-shadow: ${props => props.theme.bs}, inset 4px 0 0 0 ${props.theme.red};
+            background-color: ${lighten(0.46, props.theme.red)} !important;
+        `}
     ${ContentBlockHeader} {
         ${props => props.theme.lastItemMargin}
         background-color: #fff;
@@ -59,9 +67,24 @@ export const ContentBlockStyles = styled.div<Props>`
     }
 `;
 
-const ContentBlock: React.FC<Props> = ({ children, title, contentGutter, headerGutter }) => {
+const ContentBlock: React.FC<Props> = ({ children, title, contentGutter, headerGutter, alert }) => {
+    const animationValues = {
+        x: [-10, 10, -20, 10, 0],
+    };
+    const transitionValues = {
+        duration: 0.3,
+        ease: 'easeInOut',
+        loop: 1,
+    };
     return (
-        <ContentBlockStyles contentGutter={contentGutter} headerGutter={headerGutter} title={title}>
+        <ContentBlockStyles
+            contentGutter={contentGutter}
+            alert={alert}
+            headerGutter={headerGutter}
+            title={title}
+            animate={alert ? animationValues : {}}
+            transition={alert ? transitionValues : {}}
+        >
             {title && (
                 <ContentBlockHeader>
                     <h3>{title}</h3>

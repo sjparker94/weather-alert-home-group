@@ -99,7 +99,7 @@ exports[`<LocationDetailPage /> renders with the correct location and matches sn
       class="content-wrapper"
     >
       <div
-        class="sc-AxheI bcXyQD"
+        class="sc-AxheI kwSqZm"
       >
         <div
           class="sc-AxgMl cVkjKg"
@@ -223,7 +223,7 @@ exports[`<LocationDetailPage /> renders with the correct location and matches sn
         class="cols-wrapper"
       >
         <div
-          class="sc-AxheI sc-fznZeY fopswh"
+          class="sc-AxheI sc-fznZeY kJLAmK"
         >
           <h4>
             Summary
@@ -240,7 +240,7 @@ exports[`<LocationDetailPage /> renders with the correct location and matches sn
           </p>
         </div>
         <div
-          class="sc-AxheI sc-fznZeY fopswh"
+          class="sc-AxheI sc-fznZeY kJLAmK"
         >
           <h4>
             Humidity
@@ -257,7 +257,7 @@ exports[`<LocationDetailPage /> renders with the correct location and matches sn
           </p>
         </div>
         <div
-          class="sc-AxheI sc-fznZeY fopswh"
+          class="sc-AxheI sc-fznZeY kJLAmK"
         >
           <h4>
             Visibility

@@ -122,4 +122,34 @@ describe('<App />', () => {
         // Check that the correct location has been added
         expect(favouriteLocationEls[0]).toHaveTextContent(mockLocation.name);
     });
+
+    it('shows the error message when a user has 20 locations and does not show the form', async () => {
+        // fill an array with 20 locations to mock the store
+        const fullLocations = new Array(20).fill(null).map((_, i) => fakeLocation({ id: 123 + i }));
+        const mockInitalReduxStateWithFullData: AppState = {
+            locations: {
+                ...locationsInitialState,
+                isInitialLoad: false,
+                data: fullLocations,
+            },
+            settings: {
+                ...settingsInitialState,
+            },
+        };
+
+        render(<App />, mockInitalReduxStateWithFullData);
+
+        axios.get = jest.fn().mockResolvedValue({ data: mockLocation });
+
+        const errorHeading = screen.getByRole('heading', {
+            name: 'Maximum Locations Added',
+        });
+        const errorMessageText = `You have added the maximum of 20 locations. To change your favourites please remove an existing location and the search will appear.`;
+        const errorPara = screen.getByText(errorMessageText);
+        const searchInput = screen.queryByPlaceholderText(/Newcastle upon Tyne/i);
+
+        expect(errorHeading).toBeInTheDocument();
+        expect(errorPara).toBeInTheDocument();
+        expect(searchInput).not.toBeInTheDocument();
+    });
 });
