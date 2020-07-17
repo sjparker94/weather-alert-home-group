@@ -10,13 +10,42 @@ const MainSearchInputStyles = styled.div`
         ${props => props.theme.fontSize(18, 8)};
         ${props => props.theme.font('600')};
     }
+    .label-with-button-wrapper {
+        display: flex;
+        align-items: center;
+        label {
+            flex: 1 1 100%;
+        }
+        button {
+            flex: 0 0 auto;
+            margin-left: ${props => props.theme.gutterPercentage(0.25)};
+            background-color: ${props => transparentize(0.9, props.theme.blueGrey)};
+            color: ${props => props.theme.textColor};
+            ${props => props.theme.font('600')}
+            ${props => props.theme.fontSize(12)}
+            padding: 2px 8px;
+            margin: 0;
+            margin-top: -8px;
+            border-radius: ${props => props.theme.smallBorderRadius};
+            transition: all 0.2s ${props => props.theme.smoothAnimation};
+            &:hover {
+                color: ${props => props.theme.primaryColor};
+                background-color: ${props => transparentize(0.85, props.theme.primaryColor)};
+            }
+            .material-icons {
+                font-size: 16px;
+                vertical-align: bottom;
+            }
+        }
+    }
     input[type='text'],
     input[type='password'],
     input[type='email'],
     input[type='search'],
     input[type='number'],
     input[type='file'],
-    input[type='time'] {
+    input[type='time'],
+    select {
         ${props => props.theme.font('400')};
         width: 100%;
         padding: ${props => rem(12, props.theme.bodyFontSize)}

@@ -8,10 +8,12 @@ import PageTitleSection from '../components/PageTitleSection/PageTitleSection';
 import useForm from '../hooks/useForm';
 import useShallowEqualSelector from '../hooks/useShallowEqualSelector';
 import Location from '../interfaces/Location';
+import SearchFormValues from '../interfaces/SearchFormValues';
 
 const HomePage: React.FC = () => {
-    const { inputs, handleChange, resetForm } = useForm({
+    const { inputs, handleChange, resetForm, clearItem } = useForm<SearchFormValues>({
         city: '',
+        countryCode: '',
     });
     const locations = useShallowEqualSelector<Location[]>(state => state.locations.data);
     return (
@@ -33,7 +35,11 @@ const HomePage: React.FC = () => {
                     </ContentBlock>
                 ) : (
                     <ContentBlock title="Location Search">
-                        <SearchForm inputs={inputs} handleChange={handleChange} />
+                        <SearchForm
+                            inputs={inputs}
+                            handleChange={handleChange}
+                            clearItem={clearItem}
+                        />
                         <ConfirmLocationBlock resetForm={resetForm} />
                     </ContentBlock>
                 )}

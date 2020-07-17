@@ -8,19 +8,36 @@ import { searchLocation } from '../../actions/locationsActions';
 import ErrorAlertBox from '../ErrorAlertBox/ErrorAlertBox';
 import SearchLocationState from '../../interfaces/SearchLocationState';
 import useShallowEqualSelector from '../../hooks/useShallowEqualSelector';
+import MainSearchSelect from './MainSearchSelect';
+import { device } from '../../styles/breakpoint';
+import SearchFormValues from '../../interfaces/SearchFormValues';
 
 const SearchFormStyles = styled.form`
     ${props => props.theme.lastItemMargin}
     margin-bottom: ${props => props.theme.gutter};
+    .inputs-wrapper {
+        @media ${device.laptopMMin} {
+            display: flex;
+            > * {
+                &:first-child {
+                    flex: 1 1 70%;
+                    margin-right: ${props => props.theme.gutter};
+                }
+            }
+        }
+    }
+
 `;
 
 interface Props {
     inputs: {
         city: string;
+        countryCode: string;
     };
-    handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    clearItem: (field: keyof SearchFormValues) => void;
+    handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
 }
-const SearchForm: React.FC<Props> = ({ inputs, handleChange }) => {
+const SearchForm: React.FC<Props> = ({ inputs, handleChange, clearItem }) => {
     const dispatch = useDispatch();
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -31,7 +48,7 @@ const SearchForm: React.FC<Props> = ({ inputs, handleChange }) => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (inputs.city.length) {
-            dispatch(searchLocation(inputs.city));
+            dispatch(searchLocation(inputs.city, inputs.countryCode));
         }
     };
 
@@ -57,7 +74,14 @@ const SearchForm: React.FC<Props> = ({ inputs, handleChange }) => {
                     description="E.g. Newcastle Upon Tyne or New York"
                     forwardedRef={inputRef}
                 />
-                {/* <MainSearchSelect /> */}
+                <MainSearchSelect
+                    name="countryCode"
+                    label="Country"
+                    handleChange={handleChange}
+                    value={inputs.countryCode}
+                    clearItem={clearItem}
+                    description="Filter the results to a specific country"
+                />
             </div>
             {error && <ErrorAlertBox error={error} size="form" testId="search-error" />}
             <Button

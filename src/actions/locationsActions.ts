@@ -1,4 +1,4 @@
-import { Action, Dispatch } from 'redux';
+import { Action } from 'redux';
 import axios from 'axios';
 import { ThunkAction } from 'redux-thunk';
 
@@ -105,13 +105,16 @@ export const searchLocationCancel = (): SearchLocationCancel => {
     };
 };
 
-export const searchLocation = (cityName: string): AppThunk<Promise<void>> => {
+export const searchLocation = (cityName: string, countryCode?: string): AppThunk<Promise<void>> => {
     return async dispatch => {
         dispatch(searchLocationRequest());
 
         try {
+            const countryCodeUrlParam = countryCode ? `,${countryCode}` : '';
             const response = await axios.get<Location>(
-                `${process.env.REACT_APP_OPENWEATHER_API_URL}weather?q=${cityName}&units=${
+                `${
+                    process.env.REACT_APP_OPENWEATHER_API_URL
+                }weather?q=${cityName}${countryCodeUrlParam}&units=${
                     process.env.REACT_APP_OPENWEATHER_API_UNITS
                 }&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}`
             );

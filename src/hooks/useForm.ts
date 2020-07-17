@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 function useForm<T extends {}>(initial: T) {
     const [inputs, setInputs] = useState(initial);
 
-    function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
         let { value, name } = e.target;
         setInputs({
             ...inputs,
@@ -23,12 +23,19 @@ function useForm<T extends {}>(initial: T) {
         // @ts-ignore
         setInputs(blankState);
     }
+    function clearItem<K extends keyof T>(field: K) {
+        setInputs({
+            ...inputs,
+            [field]: initial[field],
+        });
+    }
 
     return {
         inputs,
         handleChange,
         resetForm,
         clearForm,
+        clearItem,
     };
 }
 

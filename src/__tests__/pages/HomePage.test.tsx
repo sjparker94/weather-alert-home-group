@@ -48,23 +48,41 @@ describe('<App />', () => {
     it('handles user input', async () => {
         render(<App />);
         const inputEl = screen.getByTestId('location-search-input');
-        expect(inputEl).toBeInTheDocument();
+        const selectEl = screen.getByDisplayValue('Any');
 
         await userEvent.type(inputEl, 'London');
+        fireEvent.change(selectEl, { target: { value: 'GB' } });
 
+        expect(inputEl).toBeInTheDocument();
+        expect(selectEl).toBeInTheDocument();
         expect(inputEl).toHaveAttribute('value', 'London');
+        expect(screen.getByDisplayValue('United Kingdom')).toBeInTheDocument();
+    });
+    it('clears the select when the button is pressed', async () => {
+        render(<App />);
+        const selectEl = screen.getByDisplayValue('Any');
+        const buttonEl = screen.getByRole('button', {
+            name: /clear/i,
+        });
+
+        fireEvent.change(selectEl, { target: { value: 'GB' } });
+        fireEvent.click(buttonEl);
+
+        // Tested that the value changes in another test so check that this clears it
+        expect(screen.getByDisplayValue('Any')).toBeInTheDocument();
     });
     it('displays confirm block after a successful search', async () => {
         const { getByText, queryByTestId } = render(<HomePage />, mockInitalReduxStateWithData);
 
+        const selectEl = screen.getByDisplayValue('Any');
         const inputEl = screen.getByPlaceholderText(/Newcastle Upon Tyne/i);
         const buttonEl = screen.getByTestId('main-search-button');
         axios.get = jest.fn().mockResolvedValueOnce({ data: mockLocation3 });
 
         await userEvent.type(inputEl, 'Somewhere else');
+        fireEvent.change(selectEl, { target: { value: 'GB' } });
         fireEvent.click(buttonEl);
 
-        // await waitForElement(() => getByText('Richard'));
         await waitFor(() => {
             // Check the api has been called
             expect(axios.get).toHaveBeenCalledTimes(1);
