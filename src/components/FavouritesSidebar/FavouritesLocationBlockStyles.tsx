@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { lighten, darken } from 'polished';
+import { lighten } from 'polished';
 import { motion } from 'framer-motion';
 
 import CircleButton from '../CircleButton/CircleButton';

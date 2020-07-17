@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
+
 import Location from '../../interfaces/Location';
 import LocationDetailSummaryStyles from './LocationDetailSummaryStyles';
 import ContentBlockHeader from '../ContentBlock/ContentBlockHeader';
-import WindSpeedTextValue from '../../interfaces/WindSpeedTextValue';
 import { mpsToMph } from '../../utils/conversionUtils';
 import WindDetails from './WindDetails';
 import { ThemeContext } from 'styled-components';

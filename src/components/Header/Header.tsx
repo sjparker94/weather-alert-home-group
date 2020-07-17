@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { transparentize, lighten } from 'polished';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';

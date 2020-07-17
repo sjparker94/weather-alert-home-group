@@ -10,7 +10,7 @@ import { findByProp } from '../utils/arrayUtils';
 import LocationDetailSection from '../components/LocationDetail/LocationDetailSection';
 import LocationDetailSummary from '../components/LocationDetail/LocationDetailSummary';
 import PageTitleSection from '../components/PageTitleSection/PageTitleSection';
-import { convertToFahrenheit, mToKm, mToMiles } from '../utils/conversionUtils';
+import { mToKm, mToMiles } from '../utils/conversionUtils';
 import { BASE_IMAGE_URL } from '../constants/siteInfo';
 import SettingsState from '../interfaces/SettingsState';
 import { getTempDisplayValue } from '../utils/displayUtils';
