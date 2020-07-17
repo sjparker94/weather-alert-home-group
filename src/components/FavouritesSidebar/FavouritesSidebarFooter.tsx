@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { lighten } from 'polished';
+
 import Location from '../../interfaces/Location';
 import { device } from '../../styles/breakpoint';
 import { BASE_IMAGE_URL } from '../../constants/siteInfo';

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import HomeContentWrapper from '../components/ContentBlock/ContentWrapper';
 import SearchForm from '../components/SearchForm/SearchForm';
 import ContentBlock from '../components/ContentBlock/ContentBlock';

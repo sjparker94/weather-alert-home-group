@@ -1,4 +1,5 @@
 import React from 'react';
+
 import ToggleSwitchStyles from './ToggleSwitchStyles';
 import HiddenCheckbox from '../Form/HiddenCheckbox';
 

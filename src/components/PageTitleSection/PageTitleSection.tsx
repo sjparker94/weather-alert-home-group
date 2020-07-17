@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { transparentize } from 'polished';
+
 import { device } from '../../styles/breakpoint';
 
 const PageTitleSection = styled.section`

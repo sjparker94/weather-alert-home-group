@@ -1,4 +1,5 @@
 import React from 'react';
+
 import ErrorAlertBoxStyles from './ErrorAlertBoxStyles';
 
 export type Sizes = 'small' | 'form';

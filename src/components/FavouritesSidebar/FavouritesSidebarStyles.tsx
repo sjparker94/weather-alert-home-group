@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import { device } from '../../styles/breakpoint';
 import { lighten } from 'polished';
+
+import { device } from '../../styles/breakpoint';
 
 const FavouritesSidebarStyles = styled.div`
     background-color: ${props => props.theme.favouritesSidebarBg()};

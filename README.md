@@ -1,4 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Home Group Weather Alert System
+
+App will allow you to save up to 20 locations to your favourites and view extra forecast details for each. .env file will be required to access the data using an api key.
 
 ## Available Scripts
 

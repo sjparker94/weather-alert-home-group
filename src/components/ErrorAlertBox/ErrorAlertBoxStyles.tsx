@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
-import { Sizes } from './ErrorAlertBox';
 import { motion } from 'framer-motion';
+
+import { Sizes } from './ErrorAlertBox';
 
 interface Props {
     size?: Sizes;

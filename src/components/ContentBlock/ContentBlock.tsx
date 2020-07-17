@@ -1,9 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { math, lighten } from 'polished';
-import ContentBlockHeader from './ContentBlockHeader';
 import { motion } from 'framer-motion';
+
+import ContentBlockHeader from './ContentBlockHeader';
 
 interface Props {
     contentGutter?: string;

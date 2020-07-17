@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { device } from '../../styles/breakpoint';
 
 const FavouriteLocationsWrapper = styled.div`

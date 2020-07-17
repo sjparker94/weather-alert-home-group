@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { ContentBlockStyles } from '../ContentBlock/ContentBlock';
-import { capitalizeFirstLetter } from '../../utils/stringUtils';
 import { device } from '../../styles/breakpoint';
 
 const LocationDataItemStyles = styled(ContentBlockStyles)`

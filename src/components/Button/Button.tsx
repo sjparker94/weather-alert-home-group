@@ -1,13 +1,9 @@
 import styled, { css } from 'styled-components';
 import { readableColor, transparentize } from 'polished';
 
-// export type ButtonSizeOptions = 'small' | 'default' | 'large' | 'xLarge';
-
 interface Props {
     fullWidth?: boolean;
     colorTheme?: string;
-    // size?: ButtonSizeOptions;
-    // flat?: boolean;
 }
 
 const buttonHoverBs = `0 0.3px 1px rgba(0, 0, 0, 0.034), 0 1.1px 3.4px rgba(0, 0, 0, 0.049), 0 5px 15px rgba(0, 0, 0, 0.08)`;
